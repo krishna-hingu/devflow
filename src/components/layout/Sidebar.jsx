@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const navigationItems = [
   {
     name: "Dashboard",
@@ -32,17 +32,15 @@ function Sidebar() {
       <nav className="flex flex-col px-4 gap-1">
         {navigationItems.map((item) => {
           return (
-            <Link
+            <NavLink
               to={item.path}
               key={item.path}
-              className={
-                window.location.pathname === item.path
-                  ? "py-2 px-3 bg-blue-500"
-                  : "py-2 px-3"
+              className={({ isActive }) =>
+                isActive ? "py-2 px-3 bg-blue-500" : "py-2 px-3"
               }
             >
               {item.name}
-            </Link>
+            </NavLink>
           );
         })}
       </nav>
