@@ -1,0 +1,573 @@
+# STEP 7 — RESPONSIVE STRATEGY
+
+Step 6 is complete. ✅
+
+Now we define **how the same DevFlow application adapts between desktop, tablet, and mobile**.
+
+We're keeping this focused. After this, we enter **architecture**.
+
+---
+
+## 7.1 Our Three Layout Targets
+
+We'll design for:
+
+```text
+Desktop
+≥ 1024px
+
+Tablet
+768px – 1023px
+
+Mobile
+< 768px
+```
+
+These aren't rigid rules for every component. They're our initial layout strategy.
+
+---
+
+# 7.2 Desktop
+
+Desktop is the primary workspace experience.
+
+Conceptually:
+
+```text
+┌──────────────┬────────────────────────────────────┐
+│              │ Header                             │
+│              ├────────────────────────────────────┤
+│   Sidebar    │                                    │
+│              │                                    │
+│ Dashboard    │          Main Content              │
+│ Projects     │                                    │
+│ Activity     │                                    │
+│ Analytics    │                                    │
+│              │                                    │
+│──────────────│                                    │
+│ Profile      │                                    │
+│ Settings     │                                    │
+└──────────────┴────────────────────────────────────┘
+```
+
+### Desktop behavior
+
+Sidebar:
+
+* Visible
+* Persistent
+* Full navigation available
+
+Main content:
+
+* Flexible width
+* Maximum content width where appropriate
+* Comfortable spacing
+
+For data-heavy screens such as Projects and Analytics, we can use the available horizontal space rather than unnecessarily constraining everything.
+
+---
+
+# 7.3 Tablet
+
+Tablet has less horizontal space, so the navigation becomes less dominant.
+
+Conceptually:
+
+```text
+┌──────────┬──────────────────────────────────────┐
+│          │ Header                               │
+│ Sidebar  ├──────────────────────────────────────┤
+│          │                                      │
+│ Icons /  │           Main Content               │
+│ compact  │                                      │
+│ nav      │                                      │
+│          │                                      │
+└──────────┴──────────────────────────────────────┘
+```
+
+The exact behavior can be:
+
+```text
+Desktop sidebar
+      ↓
+Compact sidebar
+```
+
+Instead of immediately removing navigation.
+
+This gives us an opportunity to practice responsive layout without creating an entirely different application.
+
+---
+
+# 7.4 Mobile
+
+Mobile is a different interaction environment.
+
+We should not try to squeeze the desktop dashboard into a 375px screen.
+
+Instead:
+
+```text
+┌─────────────────────────────┐
+│ ☰   DevFlow          User  │
+├─────────────────────────────┤
+│                             │
+│ Dashboard                   │
+│                             │
+│ Summary                     │
+│ ┌──────────┐ ┌──────────┐  │
+│ │ Projects │ │ Tasks    │  │
+│ └──────────┘ └──────────┘  │
+│                             │
+│ Current Work                │
+│ ┌─────────────────────────┐ │
+│ │ Project                 │ │
+│ │ Progress                │ │
+│ └─────────────────────────┘ │
+│                             │
+└─────────────────────────────┘
+```
+
+### Mobile principles
+
+* Full-width content
+* Compact header
+* Navigation accessible through a mobile menu
+* Cards stack vertically
+* Multi-column grids collapse
+* Tables transform when necessary
+* Forms become single-column
+* Touch targets remain comfortable
+
+---
+
+# 7.5 Dashboard Transformation
+
+Desktop:
+
+```text
+┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐
+│Projects│ │ Tasks  │ │Complete│ │Progress│
+└────────┘ └────────┘ └────────┘ └────────┘
+```
+
+Tablet:
+
+```text
+┌────────┐ ┌────────┐
+│Projects│ │ Tasks  │
+└────────┘ └────────┘
+
+┌────────┐ ┌────────┐
+│Complete│ │Progress│
+└────────┘ └────────┘
+```
+
+Mobile:
+
+```text
+┌──────────────────┐
+│ Projects         │
+└──────────────────┘
+
+┌──────────────────┐
+│ Open Tasks       │
+└──────────────────┘
+
+┌──────────────────┐
+│ Completed        │
+└──────────────────┘
+```
+
+The **information stays the same**.
+
+The **layout changes**.
+
+That's an important responsive principle.
+
+---
+
+# 7.6 Projects
+
+Desktop might support:
+
+```text
+Search                         + New Project
+
+┌─────────┐ ┌─────────┐ ┌─────────┐
+│ Project │ │ Project │ │ Project │
+│         │ │         │ │         │
+└─────────┘ └─────────┘ └─────────┘
+```
+
+Tablet:
+
+```text
+┌─────────────┐ ┌─────────────┐
+│ Project     │ │ Project     │
+└─────────────┘ └─────────────┘
+```
+
+Mobile:
+
+```text
+┌─────────────────────────┐
+│ Project                 │
+│ Progress                │
+│ 8 tasks                 │
+└─────────────────────────┘
+
+┌─────────────────────────┐
+│ Project                 │
+│ Progress                │
+│ 4 tasks                 │
+└─────────────────────────┘
+```
+
+---
+
+# 7.7 Tasks
+
+Desktop can use a table/list:
+
+```text
+Task          Priority    Status       Due
+────────────────────────────────────────────
+Build API     High        Progress     Today
+Navbar        Medium      Pending      Tomorrow
+```
+
+Mobile should not become:
+
+```text
+Task | Priority | Status | Due
+      ↓
+[everything squeezed together]
+```
+
+Instead, we can transform each task into a compact item/card:
+
+```text
+┌────────────────────────────┐
+│ Build API                  │
+│ High · In Progress         │
+│ Due today                  │
+└────────────────────────────┘
+```
+
+We'll make this decision when we build the task interface.
+
+---
+
+# 7.8 Forms
+
+Desktop:
+
+```text
+Label
+[____________________________]
+
+Description
+[____________________________]
+[____________________________]
+
+[Cancel] [Create Project]
+```
+
+Mobile:
+
+```text
+Label
+[________________]
+
+Description
+[________________]
+[________________]
+
+[Create Project]
+[Cancel]
+```
+
+The form becomes a single comfortable column.
+
+---
+
+# 7.9 Project Details
+
+Desktop may have:
+
+```text
+┌───────────────────────────────────────┐
+│ Project information                   │
+└───────────────────────────────────────┘
+
+┌──────────────────┐ ┌──────────────────┐
+│ Progress         │ │ Project stats    │
+└──────────────────┘ └──────────────────┘
+
+┌───────────────────────────────────────┐
+│ Tasks                                 │
+└───────────────────────────────────────┘
+```
+
+Mobile:
+
+```text
+Project information
+        ↓
+Progress
+        ↓
+Stats
+        ↓
+Tasks
+```
+
+Again:
+
+**same information, different composition.**
+
+---
+
+# 7.10 Analytics
+
+Analytics requires special attention.
+
+Desktop:
+
+```text
+┌──────────────────┐ ┌──────────────────┐
+│ Completed Tasks  │ │ Completion Rate  │
+└──────────────────┘ └──────────────────┘
+
+┌─────────────────────────────────────────┐
+│ Productivity chart                      │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+Mobile:
+
+```text
+┌──────────────────────┐
+│ Completed Tasks      │
+└──────────────────────┘
+
+┌──────────────────────┐
+│ Completion Rate      │
+└──────────────────────┘
+
+┌──────────────────────┐
+│ Chart                │
+│                      │
+└──────────────────────┘
+```
+
+Charts must remain readable; we won't simply shrink them until they're useless.
+
+---
+
+# 7.11 Navigation Strategy
+
+### Desktop
+
+```text
+Persistent sidebar
+```
+
+### Tablet
+
+```text
+Compact sidebar
+```
+
+### Mobile
+
+```text
+Header
+  ↓
+Menu trigger
+  ↓
+Navigation drawer/menu
+```
+
+The navigation should remain available without consuming most of the mobile screen.
+
+---
+
+# 7.12 Responsive Spacing
+
+We won't use identical spacing everywhere.
+
+Conceptually:
+
+```text
+Desktop
+More breathing room
+
+Tablet
+Moderate spacing
+
+Mobile
+Compact but comfortable
+```
+
+For example, a large desktop section might use:
+
+```text
+32–40px
+```
+
+while mobile might use:
+
+```text
+20–24px
+```
+
+The goal isn't "make everything smaller."
+
+It's:
+
+> **Use the available space intelligently.**
+
+---
+
+# 7.13 Responsive Typography
+
+We can slightly reduce large headings on smaller screens.
+
+For example:
+
+```text
+Desktop
+32px
+
+Tablet
+28–30px
+
+Mobile
+24–28px
+```
+
+But body text shouldn't become tiny just to fit more content.
+
+Readability comes first.
+
+---
+
+# 7.14 Responsive Engineering Rule
+
+Here's the rule I want you to remember while building DevFlow:
+
+> **Responsive design is not a collection of media-query fixes. It is designing how the interface changes as the available space changes.**
+
+We'll use Tailwind's responsive utilities to implement this.
+
+You'll therefore learn Tailwind through actual problems such as:
+
+```text
+"These three cards need to become one column on mobile."
+
+→ Think about layout.
+
+→ Decide breakpoint.
+
+→ Implement responsive utilities.
+
+→ Test.
+
+→ Inspect.
+
+→ Adjust.
+```
+
+That's exactly the kind of practical Tailwind learning we want.
+
+---
+
+# 7.15 Responsive Testing
+
+We'll eventually test DevFlow at approximately:
+
+```text
+Mobile
+375px
+390px
+430px
+
+Tablet
+768px
+820px
+
+Desktop
+1024px
+1280px
+1440px
+```
+
+We don't need to manually build separate versions.
+
+We'll use DevTools responsive mode to inspect behavior.
+
+---
+
+# 🔒 STEP 7 CHECKPOINT
+
+Our responsive strategy is now:
+
+```text
+              DEVFLOW
+                  │
+      ┌───────────┼───────────┐
+      ↓           ↓           ↓
+   Desktop      Tablet      Mobile
+      │           │           │
+ Persistent     Compact     Mobile
+  sidebar       sidebar     navigation
+      │           │           │
+ Multi-column   Adaptive    Stacked
+ layouts        layouts     layouts
+      │           │           │
+      └───────────┼───────────┘
+                  ↓
+          Same product/data
+          Different layout
+```
+
+### Core principle:
+
+> **Content and meaning remain consistent; layout adapts to the device.**
+
+---
+
+# ✅ STEP 7 — RESPONSIVE STRATEGY COMPLETE
+
+We've now finished the **design/planning foundation**:
+
+```text
+1. Product Definition       ✅
+2. MVP Requirements         ✅
+3. User Flows               ✅
+4. Page/Screen Map          ✅
+5. UI/UX Direction          ✅
+6. Design System            ✅
+7. Responsive Strategy      ✅
+```
+
+Now we enter the part that matters most for your React learning:
+
+# 🏗️ PHASE 2 — ARCHITECTURE
+
+## STEP 8 — Application Architecture
+
+This is where we stop asking:
+
+> "What should DevFlow look like?"
+
+and start asking:
+
+> **"How should we structure the application so all these pieces work together?"**
+
+We'll make the architecture decisions **together**, one at a time.
+
+No folder structure yet. First we'll understand the application's boundaries.

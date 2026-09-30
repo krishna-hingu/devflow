@@ -1,0 +1,475 @@
+# STEP 2 — MVP Requirements
+
+Step 1 is locked. ✅
+
+Now we answer only:
+
+> **What must DevFlow actually be able to do in its first usable version?**
+
+We are **not designing the UI yet** and **not deciding architecture yet**.
+
+---
+
+## 2.1 MVP Goal
+
+The MVP should allow a developer to:
+
+```text
+Open DevFlow
+   ↓
+Understand current work
+   ↓
+View projects
+   ↓
+Open a project
+   ↓
+Manage its tasks
+   ↓
+View recent activity
+   ↓
+See basic productivity information
+```
+
+The user should be able to complete that journey without anything outside the MVP being required.
+
+---
+
+# 2.2 MVP Feature Set
+
+## ① Dashboard
+
+The dashboard gives the developer an overview of their current work.
+
+It should show things such as:
+
+* Total projects
+* Active projects
+* Open tasks
+* Completed tasks
+* Recent activity
+* Project progress
+* Basic productivity summary
+
+### User can:
+
+* Navigate to projects
+* Open a project
+* Navigate to activity
+* Navigate to analytics
+
+---
+
+# ② Projects
+
+The Projects area manages the developer's projects.
+
+### User can:
+
+* View all projects
+* Search projects
+* Filter projects if useful
+* See basic project information
+* Open a project
+* Create a project
+* Edit a project
+* Delete/archive a project
+
+A project should have enough information to make the project list useful, for example:
+
+```text
+Project
+├── Name
+├── Description
+├── Status
+├── Progress
+├── Due date
+└── Task summary
+```
+
+We will decide the **exact data fields later** when we reach the data-model step.
+
+---
+
+# ③ Project Details
+
+Opening a project should give the user a deeper view.
+
+For example:
+
+```text
+Project
+├── Overview
+├── Progress
+├── Tasks
+└── Recent activity
+```
+
+### User can:
+
+* View project information
+* View its tasks
+* Create tasks
+* Open tasks
+* Edit tasks
+* Complete tasks
+* Delete tasks
+
+---
+
+# ④ Tasks
+
+Tasks are the primary unit of work inside a project.
+
+### User can:
+
+* Create a task
+* Edit a task
+* Delete a task
+* Mark task complete
+* Mark task incomplete
+* Search tasks
+* Filter tasks
+* Open task details
+
+Possible task information:
+
+```text
+Task
+├── Title
+├── Description
+├── Status
+├── Priority
+├── Due date
+├── Project
+└── Created/updated information
+```
+
+Again, exact fields come later.
+
+---
+
+# ⑤ Task Details
+
+A task should have its own detail view.
+
+The user should be able to understand:
+
+```text
+What is this task?
+Which project does it belong to?
+What is its status?
+What is its priority?
+When is it due?
+```
+
+And perform relevant actions such as:
+
+```text
+Edit
+Complete
+Delete
+```
+
+---
+
+# ⑥ Activity
+
+Activity gives the user a chronological view of meaningful actions.
+
+Examples:
+
+```text
+Project created
+Task created
+Task completed
+Task updated
+Project updated
+```
+
+The important thing is that activity should **come from things happening in DevFlow**.
+
+It shouldn't be a completely disconnected fake page.
+
+---
+
+# ⑦ Analytics
+
+MVP analytics should remain intentionally simple.
+
+For example:
+
+```text
+Tasks completed
+Tasks remaining
+Project progress
+Completion trend
+```
+
+The purpose is to practice presenting application data effectively.
+
+We are **not** building an advanced analytics engine.
+
+---
+
+# ⑧ Profile
+
+Basic profile information.
+
+For example:
+
+```text
+Name
+Email
+Avatar
+Role
+```
+
+For MVP, this can be frontend/mock data.
+
+No authentication system yet.
+
+---
+
+# ⑨ Settings
+
+Basic application settings UI.
+
+Potential examples:
+
+```text
+Appearance
+Notifications
+Preferences
+```
+
+Again, these don't need backend persistence in the MVP.
+
+---
+
+# 2.3 MVP CRUD
+
+A major reason we're building DevFlow is to practice real application interactions.
+
+Therefore:
+
+### Projects
+
+```text
+Create
+Read
+Update
+Delete
+```
+
+### Tasks
+
+```text
+Create
+Read
+Update
+Delete
+```
+
+This gives us practical React experience with:
+
+```text
+Forms
+State
+Events
+Lists
+Conditional rendering
+Derived data
+Data updates
+UI synchronization
+```
+
+---
+
+# 2.4 Required UI States
+
+For data-driven areas, MVP must account for:
+
+### Loading
+
+```text
+"Loading projects..."
+```
+
+### Empty
+
+```text
+No projects yet.
+Create your first project.
+```
+
+### Error
+
+```text
+Something went wrong.
+Try again.
+```
+
+### Success
+
+For example after creating a task:
+
+```text
+Task created successfully.
+```
+
+These states are part of the feature requirements, not optional polish.
+
+---
+
+# 2.5 Search & Filtering
+
+We need enough interaction to make the application feel real.
+
+### Projects
+
+Search by project name.
+
+### Tasks
+
+Search/filter by things such as:
+
+```text
+Status
+Priority
+Search text
+```
+
+We'll keep the filtering system reasonable rather than creating a complicated query engine.
+
+---
+
+# 2.6 Responsive MVP
+
+The MVP must work across:
+
+```text
+Desktop
+Tablet
+Mobile
+```
+
+Responsive behavior isn't something we'll "maybe add later."
+
+We'll account for it from the beginning and refine it toward the end.
+
+---
+
+# 2.7 MVP Exclusions
+
+To protect the scope, these are **explicitly outside MVP**:
+
+```text
+Authentication
+Real backend
+MongoDB
+Node/Express
+Socket.io
+Real-time collaboration
+Team accounts
+Chat
+Billing
+Subscriptions
+AI assistant
+Advanced permissions
+Advanced analytics
+```
+
+They can become future extensions.
+
+---
+
+# 2.8 MVP Success Test
+
+When we're finished, a user should be able to perform this complete journey:
+
+```text
+Dashboard
+    ↓
+Projects
+    ↓
+Create/Open Project
+    ↓
+Project Details
+    ↓
+Create Task
+    ↓
+Edit Task
+    ↓
+Complete Task
+    ↓
+View Task Details
+    ↓
+See Activity Update
+    ↓
+See Updated Project/Dashboard Progress
+```
+
+If that works smoothly, **we have a real MVP**, rather than a collection of disconnected screens.
+
+---
+
+# 🔒 STEP 2 CHECKPOINT
+
+### DevFlow MVP includes:
+
+**Core**
+
+* Dashboard
+* Projects
+* Project details
+* Tasks
+* Task details
+* Activity
+* Analytics
+* Profile
+* Settings
+
+**Interactions**
+
+* Project CRUD
+* Task CRUD
+* Search
+* Filtering
+* Completion/status changes
+
+**Engineering states**
+
+* Loading
+* Empty
+* Error
+* Success
+
+**Platforms**
+
+* Desktop
+* Tablet
+* Mobile
+
+**Explicitly deferred**
+
+* Backend
+* Authentication
+* Database
+* Real-time
+* AI
+* Teams
+* Billing
+
+---
+
+# One decision before we finish Step 2
+
+I recommend we keep **this exact MVP scope** for now.
+
+If you're happy with it, say **"locked"** and we'll mark:
+
+> ✅ **STEP 2 — MVP REQUIREMENTS COMPLETE**
+
+Then we'll move to **STEP 3 — User Flows**.
+
+And we'll continue **one step only**, exactly as you requested.

@@ -1,0 +1,652 @@
+# STEP 6 — DESIGN SYSTEM
+
+Step 5 is complete. ✅
+
+Now we're going to define the **actual visual language of DevFlow**.
+
+The goal is simple:
+
+> Instead of styling every page differently, we establish a small set of rules that every screen follows.
+
+We will keep this practical because you're going to implement these rules with **Tailwind** later.
+
+---
+
+# 6.1 Design Direction
+
+Let's use a **dark-first developer SaaS interface**.
+
+Think:
+
+```text
+Dark workspace
++
+Clean surfaces
++
+Clear typography
++
+Subtle borders
++
+One strong accent
+```
+
+Not a neon "hacker" aesthetic.
+
+The interface should feel like a tool a developer could use for hours.
+
+---
+
+# 6.2 Color System
+
+We'll use semantic colors rather than randomly choosing colors.
+
+### Background hierarchy
+
+```text
+App background
+        ↓
+Surface
+        ↓
+Elevated surface
+        ↓
+Interactive surface
+```
+
+Conceptually:
+
+```text
+Background
+#0B0F14
+
+Surface
+#11161D
+
+Elevated
+#171D26
+
+Border
+#252D38
+```
+
+These are our **initial design tokens**, not colors we'll manually scatter throughout JSX.
+
+---
+
+## Text
+
+```text
+Primary text
+#F3F4F6
+
+Secondary text
+#A7AFBA
+
+Muted text
+#707986
+```
+
+Hierarchy:
+
+```text
+Primary
+  ↓
+Secondary
+  ↓
+Muted
+```
+
+---
+
+## Primary Accent
+
+We'll use a **blue/cyan-leaning accent** for the primary product interaction.
+
+Conceptually:
+
+```text
+Primary
+#3B82F6
+```
+
+Used for things like:
+
+```text
+Primary buttons
+Links
+Active navigation
+Focus indicators
+Important interactive elements
+```
+
+But **not everything blue**.
+
+---
+
+## Semantic Colors
+
+We'll also need:
+
+```text
+Success → green family
+Warning → amber family
+Error   → red family
+Info    → blue family
+```
+
+The important rule is that these colors communicate **meaning**.
+
+For example:
+
+```text
+Task completed → Success
+Due soon       → Warning
+Invalid form   → Error
+Information    → Info
+```
+
+---
+
+# 6.3 Typography
+
+We want a clean modern sans-serif.
+
+For the first implementation we'll use a system-friendly font stack rather than adding unnecessary font dependencies.
+
+### Hierarchy
+
+```text
+Display / major page heading
+        ↓
+Page heading
+        ↓
+Section heading
+        ↓
+Body
+        ↓
+Secondary
+        ↓
+Caption
+```
+
+Approximate scale:
+
+| Use                |    Size |
+| ------------------ | ------: |
+| Large page heading | 30–32px |
+| Section heading    | 20–24px |
+| Card heading       | 16–18px |
+| Body               | 14–16px |
+| Secondary          | 13–14px |
+| Caption            |    12px |
+
+We don't need 15 different font sizes.
+
+Consistency matters more.
+
+---
+
+# 6.4 Font Weight
+
+We'll primarily use:
+
+```text
+400 — Regular
+500 — Medium
+600 — Semibold
+700 — Bold
+```
+
+Most UI should live around:
+
+```text
+400
+500
+600
+```
+
+`700` is reserved for stronger headings.
+
+---
+
+# 6.5 Spacing System
+
+We'll follow a consistent spacing rhythm.
+
+Think in multiples of approximately **4px**.
+
+```text
+4
+8
+12
+16
+20
+24
+32
+40
+48
+64
+```
+
+Examples:
+
+```text
+Icon ↔ text
+    8px
+
+Form fields
+    16px
+
+Card internal padding
+    20–24px
+
+Section spacing
+    32px+
+
+Major page sections
+    40–64px
+```
+
+This is where Tailwind will become useful because its spacing utilities naturally support this kind of system.
+
+---
+
+# 6.6 Border Radius
+
+We don't want everything to look like a giant rounded pill.
+
+We'll use three main levels:
+
+```text
+Small
+6px
+
+Medium
+8px
+
+Large
+12px
+```
+
+Examples:
+
+```text
+Inputs       → 8px
+Buttons      → 8px
+Cards        → 12px
+Large panels → 12px
+```
+
+Pills are reserved for things like:
+
+```text
+Status badges
+Tags
+Small filters
+```
+
+---
+
+# 6.7 Borders
+
+DevFlow should rely more on **subtle borders** than heavy shadows.
+
+Default:
+
+```text
+1px solid border
+```
+
+Example:
+
+```text
+Card
+┌──────────────────────────┐
+│                          │
+│                          │
+└──────────────────────────┘
+```
+
+The border separates surfaces without making the interface visually heavy.
+
+---
+
+# 6.8 Shadows
+
+Use shadows sparingly.
+
+Primarily for:
+
+```text
+Dropdowns
+Modals
+Floating elements
+Important elevated surfaces
+```
+
+Normal cards don't need huge shadows.
+
+This keeps the dark interface clean.
+
+---
+
+# 6.9 Buttons
+
+We'll establish a small button hierarchy.
+
+### Primary
+
+For the main action:
+
+```text
++ Create Project
++ Add Task
+Save Changes
+```
+
+Visual idea:
+
+```text
+┌───────────────────┐
+│   + Create Project │
+└───────────────────┘
+```
+
+---
+
+### Secondary
+
+For supporting actions:
+
+```text
+Cancel
+Filter
+Edit
+```
+
+---
+
+### Ghost
+
+For low-emphasis actions:
+
+```text
+View
+More
+Back
+```
+
+---
+
+### Destructive
+
+For dangerous operations:
+
+```text
+Delete
+Remove
+```
+
+The destructive style should clearly communicate danger.
+
+---
+
+# 6.10 Inputs
+
+Inputs should have a consistent structure:
+
+```text
+Label
+
+┌───────────────────────────┐
+│ Enter project name        │
+└───────────────────────────┘
+
+Helper/error text
+```
+
+States:
+
+```text
+Default
+Focus
+Filled
+Disabled
+Error
+```
+
+Focus should be visually obvious.
+
+---
+
+# 6.11 Status Badges
+
+We'll need status indicators throughout the application.
+
+For example:
+
+```text
+● Active
+● Completed
+● Pending
+● Archived
+```
+
+But we won't depend solely on color.
+
+The text itself must communicate the state.
+
+---
+
+# 6.12 Cards
+
+Our default card pattern:
+
+```text
+┌──────────────────────────────────┐
+│ Heading                          │
+│ Supporting information           │
+│                                  │
+│ Main content                     │
+│                                  │
+│ Optional action                  │
+└──────────────────────────────────┘
+```
+
+Characteristics:
+
+```text
+Surface background
+Subtle border
+12px radius
+20–24px padding
+Clear hierarchy
+```
+
+---
+
+# 6.13 Tables / Lists
+
+Some data is better represented as a list/table rather than cards.
+
+For example, tasks could eventually look like:
+
+```text
+Task              Priority    Status       Due
+────────────────────────────────────────────────
+Build navbar      High        In progress  Today
+API integration   Medium      Pending      Sep 24
+Fix mobile UI     Low         Completed    Sep 20
+```
+
+On mobile, we should **not simply squeeze this table until it becomes unreadable**.
+
+We'll decide the responsive transformation when we implement it.
+
+---
+
+# 6.14 Icons
+
+Icons should support meaning, not replace text unnecessarily.
+
+Examples:
+
+```text
+Dashboard → dashboard icon
+Projects  → folder icon
+Activity  → activity icon
+Settings  → gear icon
+```
+
+For important actions:
+
+```text
++ Add
+Edit
+Delete
+Search
+Filter
+```
+
+But a button like:
+
+```text
+[ 🗑 ]
+```
+
+without an accessible label isn't sufficient.
+
+---
+
+# 6.15 Responsive Design Tokens
+
+Our design system itself should remain consistent across screen sizes.
+
+What changes:
+
+```text
+Layout
+Spacing density
+Navigation
+Columns
+Typography scale where necessary
+```
+
+What should NOT randomly change:
+
+```text
+Colors
+Meaning
+Component behavior
+Visual hierarchy
+```
+
+---
+
+# 6.16 Tailwind Translation
+
+This design system will eventually become something conceptually like:
+
+```text
+Design token
+      ↓
+Tailwind utility
+      ↓
+Component
+      ↓
+Page
+```
+
+For example:
+
+```text
+Background token
+       ↓
+bg-...
+       ↓
+Card component
+       ↓
+Dashboard
+```
+
+This is important.
+
+**We aren't going to memorize random Tailwind classes.**
+
+You'll learn how the design decision translates into Tailwind.
+
+---
+
+# 6.17 DevFlow Design Tokens — Initial Version
+
+Here's our foundation:
+
+| Category       | Decision                     |
+| -------------- | ---------------------------- |
+| Theme          | Dark-first                   |
+| Background     | `#0B0F14`                    |
+| Surface        | `#11161D`                    |
+| Elevated       | `#171D26`                    |
+| Border         | `#252D38`                    |
+| Primary text   | `#F3F4F6`                    |
+| Secondary text | `#A7AFBA`                    |
+| Muted text     | `#707986`                    |
+| Primary accent | `#3B82F6`                    |
+| Radius         | 6 / 8 / 12px                 |
+| Spacing        | 4px rhythm                   |
+| Typography     | System sans-serif            |
+| Shadows        | Subtle / selective           |
+| UI style       | Clean, technical, restrained |
+
+These are **initial tokens**, not something we need to endlessly tweak.
+
+When we build the actual UI, we'll validate whether they work.
+
+---
+
+# One important engineering principle
+
+We are **not trying to design a perfect Dribbble shot before coding.**
+
+Our process is:
+
+```text
+Design decision
+      ↓
+Implement
+      ↓
+Look at actual UI
+      ↓
+Identify problem
+      ↓
+Adjust
+```
+
+That's much closer to how we'll actually work as developers.
+
+---
+
+# ✅ STEP 6 — DESIGN SYSTEM COMPLETE
+
+We now have:
+
+```text
+Product
+   ↓
+MVP
+   ↓
+User flows
+   ↓
+Screens
+   ↓
+UI/UX rules
+   ↓
+Design system
+```
+
+### Next: STEP 7 — Responsive Strategy
+
+We'll define how DevFlow's **desktop → tablet → mobile** layouts transform.
+
+After that, we enter the architecture phase.
+
+And importantly: **we're getting close to coding.** No new giant planning loop.

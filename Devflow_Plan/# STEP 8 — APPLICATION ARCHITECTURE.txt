@@ -1,0 +1,1241 @@
+# STEP 8 — APPLICATION ARCHITECTURE
+
+Step 7 is complete. ✅
+
+Now we begin architecture.
+
+And we're going to do this differently from the previous planning steps: **I will teach you architecture through the actual DevFlow problem**, not give you a giant architecture diagram to memorize.
+
+Our first question is:
+
+> **How should the application be divided into major responsibilities?**
+
+---
+
+## 8.1 Think Like the Developer
+
+Look at what we've already defined.
+
+DevFlow has:
+
+```text
+Landing
+Dashboard
+Projects
+Project Details
+Task Details
+Activity
+Analytics
+Profile
+Settings
+```
+
+A beginner might think:
+
+> "So we just create one React component for each page."
+
+That is **not enough**.
+
+Why?
+
+Imagine `ProjectDetails` becomes 500 lines long because it contains:
+
+```text
+Project header
+Project statistics
+Task list
+Task row
+Task form
+Activity
+Filters
+Buttons
+Dialogs
+```
+
+The page becomes responsible for everything.
+
+That's where architecture starts becoming important.
+
+---
+
+# 8.2 First Architectural Principle
+
+We should separate the application into **different responsibilities**.
+
+Conceptually:
+
+```text
+                    DEVFLOW
+                       │
+        ┌──────────────┼──────────────┐
+        ↓              ↓              ↓
+      Pages        Components       Data
+        │              │              │
+        ↓              ↓              ↓
+    Route/UI       Reusable UI     Application
+    composition    building blocks    data
+```
+
+And there are other concerns:
+
+```text
+Pages
+Components
+Layouts
+State
+Data/API
+Utilities
+```
+
+But **don't start creating folders yet.**
+
+First understand why these boundaries exist.
+
+---
+
+# 8.3 Pages vs Components
+
+Let's use the Projects screen.
+
+The page conceptually says:
+
+> "I'm the Projects page. I decide what this screen needs."
+
+But individual UI pieces can have their own responsibilities.
+
+For example:
+
+```text
+Projects Page
+│
+├── Page Header
+│   ├── Title
+│   └── New Project Button
+│
+├── Search / Filters
+│
+└── Project List
+    └── Project Card
+```
+
+So:
+
+### Page
+
+Coordinates the screen.
+
+### Component
+
+Handles a meaningful piece of UI.
+
+This gives us:
+
+```text
+Page
+ ↓
+Components
+ ↓
+Smaller UI
+```
+
+---
+
+# 8.4 But Don't Over-Componentize
+
+This is another important lesson.
+
+We **don't** want:
+
+```text
+Projects
+ ├── ProjectsTitle
+ ├── ProjectsTitleText
+ ├── ProjectsTitleContainer
+ ├── ProjectsButton
+ ├── ProjectsButtonText
+ ├── ProjectsListContainer
+ ...
+```
+
+That's technically "components," but it's terrible architecture.
+
+Instead, component boundaries should exist when they provide a reason:
+
+* Reuse
+* Complexity isolation
+* Clear responsibility
+* Independent behavior
+* Easier testing/maintenance
+
+---
+
+# 8.5 Shared vs Feature-Specific UI
+
+This is especially important for DevFlow.
+
+Some components will appear throughout the application.
+
+For example:
+
+```text
+Button
+Input
+Modal
+Badge
+Card
+```
+
+These are **shared UI components**.
+
+Other components are specific to projects:
+
+```text
+ProjectCard
+ProjectProgress
+ProjectTaskList
+```
+
+These belong to the **project feature**.
+
+Conceptually:
+
+```text
+Shared UI
+   │
+   ├── Button
+   ├── Input
+   ├── Card
+   └── Badge
+
+Project Feature
+   │
+   ├── ProjectCard
+   ├── ProjectProgress
+   └── ProjectTaskList
+```
+
+This distinction will matter later when we design our folder structure.
+
+---
+
+# 8.6 Layout Is Another Responsibility
+
+Remember our responsive shell:
+
+```text
+Sidebar
++
+Header
++
+Main Content
+```
+
+We don't want every page manually rebuilding this.
+
+Conceptually:
+
+```text
+Application Layout
+│
+├── Sidebar
+├── Header
+└── Page Content
+```
+
+Then:
+
+```text
+/dashboard
+/projects
+/activity
+/analytics
+```
+
+can all live inside the same application shell.
+
+This is exactly where your previously learned **nested routes + Outlet** become practically useful.
+
+You already learned the concept.
+
+Now we'll use it in a real application.
+
+---
+
+# 8.7 Data Is Another Responsibility
+
+Now consider this:
+
+The Dashboard wants:
+
+```text
+Total projects
+Open tasks
+Completed tasks
+Progress
+```
+
+The Projects page wants:
+
+```text
+Projects
+```
+
+The Project Details page wants:
+
+```text
+One project
+Its tasks
+Activity
+```
+
+Analytics wants:
+
+```text
+Aggregated information
+```
+
+We shouldn't make every component independently invent or manipulate its own copy of the application's data.
+
+Eventually we'll have a data flow something like:
+
+```text
+Data source
+    ↓
+Data/API layer
+    ↓
+Application state
+    ↓
+Pages
+    ↓
+Components
+    ↓
+UI
+```
+
+For our initial version, the data source can be mock/local data.
+
+Later, when you learn backend development, the same conceptual boundary can evolve toward:
+
+```text
+React
+ ↓
+API
+ ↓
+Node/Express
+ ↓
+Database
+```
+
+That's one reason we're separating responsibilities now.
+
+---
+
+# 8.8 The DevFlow Architectural Model
+
+So our first architectural model is:
+
+```text
+                         DEVFLOW
+                            │
+          ┌─────────────────┼─────────────────┐
+          │                 │                 │
+          ↓                 ↓                 ↓
+        Pages            Layouts          Components
+          │                 │                 │
+          │                 │          ┌──────┴──────┐
+          │                 │          ↓             ↓
+          │                 │       Shared       Feature
+          │                 │         UI         Components
+          │                 │
+          └─────────────────┼──────────────────────┐
+                            ↓                      ↓
+                         State                  Data
+                                                   │
+                                                   ↓
+                                             Mock/API layer
+```
+
+This isn't our folder structure yet.
+
+It's our **mental model**.
+
+---
+
+# 8.9 Now the Real Architecture Question
+
+Before we decide the actual folder structure, I want you to make the first architectural decision.
+
+Imagine this screen:
+
+```text
+/projects/123
+
+Project Details
+────────────────────────
+
+Project Header
+
+Progress
+
+Tasks
+ ├── Task
+ ├── Task
+ └── Task
+
+Recent Activity
+```
+
+### Question:
+
+Should **Project Details** be responsible for directly containing all the implementation logic for:
+
+```text
+Project header
+Progress
+Task list
+Individual task
+Activity
+```
+
+or should it **compose smaller components**, with each component responsible for a meaningful piece?
+
+Think about:
+
+* readability
+* reuse
+* complexity
+* future changes
+
+Don't worry about giving me the "correct" textbook answer.
+
+**Tell me what you would choose and why.**
+
+Then I'll review your reasoning, teach the architectural principle behind it, and we'll make the next architecture decision.
+Exactly. **That's the decision I wanted you to make.** ✅
+
+And your reasoning is heading in the right direction.
+
+## 8.1 Architectural Decision #1 — Component Composition
+
+We'll structure `Project Details` as a **composition of meaningful components**, rather than making one giant component responsible for everything.
+
+Conceptually:
+
+```text
+ProjectDetails
+│
+├── ProjectHeader
+├── ProjectProgress
+├── ProjectTaskList
+│   └── TaskItem
+└── ProjectActivity
+```
+
+The important part isn't the names. It's the **responsibility boundaries**.
+
+### `ProjectDetails`
+
+Its job is primarily to **coordinate the page**.
+
+It shouldn't need to know every tiny UI detail.
+
+### `ProjectHeader`
+
+Responsible for presenting project identity and project-level actions.
+
+### `ProjectProgress`
+
+Responsible for displaying project progress.
+
+### `ProjectTaskList`
+
+Responsible for presenting the collection of tasks.
+
+### `TaskItem`
+
+Responsible for displaying one task and its relevant interactions.
+
+### `ProjectActivity`
+
+Responsible for displaying project-related activity.
+
+---
+
+## Why this is useful
+
+Imagine we later change the task UI.
+
+Without composition:
+
+```text
+ProjectDetails.jsx
+    ↓
+Change giant component
+    ↓
+Risk affecting everything
+```
+
+With composition:
+
+```text
+ProjectDetails
+    ↓
+ProjectTaskList
+    ↓
+TaskItem
+```
+
+We can work primarily inside the task-related components.
+
+That's **separation of responsibility**.
+
+---
+
+# 8.2 But There's a Second Important Principle
+
+Component composition doesn't mean:
+
+> "Every piece of JSX becomes a component."
+
+We create a component when the boundary is **meaningful**.
+
+For example:
+
+```jsx
+<div>
+  <h2>Project Progress</h2>
+  <p>72% complete</p>
+</div>
+```
+
+We don't automatically need:
+
+```text
+ProjectProgressContainer
+ProjectProgressTitle
+ProjectProgressText
+ProjectProgressPercentage
+```
+
+That would be over-engineering.
+
+Instead:
+
+```text
+ProjectProgress
+```
+
+is a meaningful unit.
+
+---
+
+# 8.3 Now Let's Apply This to the Whole Application
+
+We can start seeing three different levels.
+
+### Level 1 — Pages
+
+```text
+Dashboard
+Projects
+ProjectDetails
+TaskDetails
+Activity
+Analytics
+Profile
+Settings
+```
+
+### Level 2 — Feature components
+
+```text
+ProjectCard
+ProjectTaskList
+TaskItem
+ProjectProgress
+ActivityList
+AnalyticsSummary
+```
+
+### Level 3 — Shared UI
+
+```text
+Button
+Input
+Card
+Badge
+Modal
+```
+
+So:
+
+```text
+Page
+ ↓
+Feature components
+ ↓
+Shared UI
+```
+
+But this isn't always a perfect hierarchy. Components can interact through props and state depending on the feature.
+
+---
+
+# 8.4 Your First Real Architecture Lesson
+
+You just made an important distinction:
+
+> **A page represents a screen; components represent meaningful responsibilities within that screen.**
+
+That's a much more useful mental model than:
+
+> "React means breaking everything into components."
+
+---
+
+# 8.5 Architectural Decision #1 — LOCKED
+
+```text
+Decision:
+Pages will compose meaningful components.
+
+Rule:
+Avoid giant page components.
+
+Rule:
+Avoid unnecessary micro-components.
+
+Goal:
+Each component should have a clear responsibility.
+```
+
+✅ **Architecture Decision #1 complete.**
+
+---
+
+# Next Decision — Where Does the State Live?
+
+Now let's use a real DevFlow problem.
+
+Suppose:
+
+```text
+ProjectDetails
+      │
+      └── ProjectTaskList
+              │
+              ├── TaskItem
+              ├── TaskItem
+              └── TaskItem
+```
+
+The user completes a task.
+
+That task change may affect:
+
+```text
+TaskItem
+    ↓
+Task list
+    ↓
+Project progress
+    ↓
+Dashboard statistics
+    ↓
+Activity
+```
+
+So here's our next architectural question:
+
+> **Where should the project's task data/state live?**
+
+Would you put the task state inside each `TaskItem`, inside `ProjectTaskList`, inside `ProjectDetails`, or somewhere else?
+
+**Think it through and tell me your choice + why.**
+Yes. You don't need to know this yet. **This is exactly what we're learning by building.**
+
+We'll make the decision together and keep moving.
+
+# STEP 8 — APPLICATION ARCHITECTURE
+
+## Architectural Decision #2 — State Ownership
+
+We have:
+
+```text
+ProjectDetails
+      │
+      └── ProjectTaskList
+              │
+              ├── TaskItem
+              ├── TaskItem
+              └── TaskItem
+```
+
+A user completes one task.
+
+That change can affect:
+
+```text
+Task status
+    ↓
+Project progress
+    ↓
+Dashboard statistics
+    ↓
+Activity
+```
+
+So putting the actual task data inside `TaskItem` would be a problem.
+
+---
+
+## 8.2 Where Should State Live?
+
+The key principle is:
+
+> **State should live at the lowest common parent that needs to coordinate that state.**
+
+For our current project, that means the task data shouldn't belong to an individual `TaskItem`.
+
+Conceptually:
+
+```text
+ProjectDetails
+      │
+      │ owns/receives project data
+      ↓
+ProjectTaskList
+      │
+      ├── TaskItem
+      ├── TaskItem
+      └── TaskItem
+```
+
+The task item receives the information it needs through props.
+
+For example:
+
+```text
+ProjectDetails
+      ↓ props
+ProjectTaskList
+      ↓ props
+TaskItem
+```
+
+And when a task changes:
+
+```text
+TaskItem
+   ↓ event
+ProjectTaskList / parent
+   ↓
+state/data update
+   ↓
+UI re-renders
+```
+
+We're not writing this code yet. We're establishing the mental model.
+
+---
+
+# 8.3 Why Not Put State Inside `TaskItem`?
+
+Imagine each task had its own independent state:
+
+```text
+TaskItem #1 → state
+TaskItem #2 → state
+TaskItem #3 → state
+```
+
+Now the parent doesn't necessarily know the actual overall task collection.
+
+But we need the collection to calculate:
+
+```text
+3 / 5 tasks completed
+```
+
+and therefore:
+
+```text
+60% project progress
+```
+
+So the **collection-level information must exist above individual task items**.
+
+---
+
+# 8.4 Why This Matters in DevFlow
+
+Suppose:
+
+```text
+Tasks:
+5 total
+2 completed
+```
+
+User completes another task.
+
+We need:
+
+```text
+5 total
+3 completed
+```
+
+Then:
+
+```text
+Project progress
+40% → 60%
+```
+
+And potentially:
+
+```text
+Dashboard
+Completed tasks: +1
+```
+
+The UI is therefore driven by shared application data.
+
+This is why state ownership matters.
+
+---
+
+# 8.5 But We Don't Want One Giant Global State
+
+Another beginner mistake would be:
+
+> "Everything affects everything, so let's put all DevFlow state into one giant global object."
+
+We won't do that.
+
+We'll initially keep state **as close to where it is needed as reasonably possible**.
+
+Later, if we discover that multiple distant parts genuinely need the same state, we'll evaluate whether it belongs in a shared state/data layer.
+
+We don't need Redux/Zustand just because the application has multiple pages.
+
+---
+
+# 8.6 Architectural Decision #2 — Locked
+
+```text
+State ownership principle:
+
+Keep state as close as possible
+to the components that need it.
+
+When multiple components need to
+coordinate the same state, move it
+to their appropriate common parent
+or shared data/state layer.
+```
+
+For DevFlow:
+
+```text
+Individual task UI
+        ↓
+doesn't own the entire task collection
+
+Task collection
+        ↓
+managed above individual TaskItem components
+```
+
+✅ **Decision #2 complete.**
+
+---
+
+# 8.7 Architectural Decision #3 — Data Flow
+
+Now we need to establish how information moves.
+
+React's basic model gives us:
+
+```text
+Parent
+  ↓
+Props
+  ↓
+Child
+```
+
+And user actions travel upward through callbacks:
+
+```text
+Child
+  ↓ event/callback
+Parent
+  ↓
+State/data update
+  ↓
+React re-render
+  ↓
+UI
+```
+
+For DevFlow:
+
+```text
+Project data
+     ↓
+ProjectDetails
+     ↓
+ProjectTaskList
+     ↓
+TaskItem
+```
+
+A task interaction:
+
+```text
+User clicks Complete
+        ↓
+TaskItem event
+        ↓
+callback
+        ↓
+parent/state update
+        ↓
+new task data
+        ↓
+React re-render
+        ↓
+updated UI
+```
+
+This is the same React you've already learned.
+
+We're simply applying it to a real application.
+
+---
+
+# 8.8 Data Should Have a Clear Source
+
+Another architectural rule:
+
+> **Don't create multiple independent copies of the same source data unless there is a reason.**
+
+For example, if a project has:
+
+```text
+tasks: [...]
+```
+
+we don't want:
+
+```text
+Project
+  → tasks
+
+Dashboard
+  → completely separate copied tasks
+
+Analytics
+  → another copied task collection
+```
+
+and then manually try to keep them synchronized.
+
+Instead, we want a clear source of truth and derive information where possible.
+
+For example:
+
+```text
+Tasks
+  ↓
+completedTasks
+  ↓
+progress
+```
+
+This connects directly to the derived-state concepts you've already learned in React.
+
+---
+
+# 8.9 Architectural Decision #3 — Locked
+
+```text
+Data should have a clear source of truth.
+
+Prefer deriving values from source data
+rather than maintaining unnecessary duplicate state.
+
+Use props/callbacks for normal component communication.
+```
+
+✅ **Decision #3 complete.**
+
+---
+
+# 8.10 Architectural Decision #4 — Application Shell
+
+We already decided that DevFlow has:
+
+```text
+Sidebar
+Header
+Main Content
+```
+
+We don't want every page rebuilding this.
+
+So we'll conceptually have:
+
+```text
+Application Layout
+│
+├── Sidebar
+├── Header
+└── Outlet
+      │
+      ├── Dashboard
+      ├── Projects
+      ├── Activity
+      ├── Analytics
+      ├── Profile
+      └── Settings
+```
+
+This connects directly to your existing React Router knowledge.
+
+The layout provides the shared shell.
+
+The route determines what appears inside it.
+
+---
+
+# 8.11 Public vs Application Layout
+
+We actually have two different experiences.
+
+### Public
+
+```text
+Landing
+```
+
+### Application
+
+```text
+Dashboard
+Projects
+Activity
+Analytics
+Profile
+Settings
+...
+```
+
+So conceptually:
+
+```text
+Routes
+│
+├── Public
+│    └── Landing
+│
+└── Application
+     └── AppLayout
+          ├── Sidebar
+          ├── Header
+          └── Outlet
+```
+
+Again, **this is architecture, not folder structure yet.**
+
+---
+
+# 8.12 Architectural Decision #4 — Locked
+
+```text
+DevFlow will use an application layout
+for authenticated/application screens.
+
+Shared shell:
+Sidebar
+Header
+Main content area
+
+Route-specific pages render inside
+the main content area.
+```
+
+Authentication itself is **not part of MVP**, so we're not implementing authentication guards now.
+
+---
+
+# 8.13 Architectural Decision #5 — Feature Boundaries
+
+Now let's organize our application by **what the user does**, rather than only by file type.
+
+Our major features are:
+
+```text
+Projects
+Tasks
+Activity
+Analytics
+Profile
+Settings
+```
+
+For example, the Projects feature might eventually contain:
+
+```text
+Project list
+Project card
+Project details
+Project form
+Project progress
+```
+
+Tasks similarly contain their task-related UI and behavior.
+
+This is different from putting every component into one enormous:
+
+```text
+components/
+```
+
+folder.
+
+We're not deciding the exact folders yet, but we're establishing the principle:
+
+> **Related functionality should have a clear home.**
+
+---
+
+# 8.14 Our Architecture So Far
+
+We now have a much clearer picture:
+
+```text
+                         DEVFLOW
+                            │
+             ┌──────────────┴──────────────┐
+             │                             │
+          Public                       Application
+             │                             │
+          Landing                      App Layout
+                                           │
+                              ┌────────────┼────────────┐
+                              │            │            │
+                           Header       Sidebar       Outlet
+                                                        │
+                                      ┌─────────────────┼───────────────┐
+                                      ↓                 ↓               ↓
+                                  Dashboard          Projects        Activity
+                                                        │
+                                                        ↓
+                                                  Project Details
+                                                        │
+                                                        ↓
+                                                   Task system
+```
+
+And underneath:
+
+```text
+Pages
+  ↓
+Feature Components
+  ↓
+Shared UI Components
+```
+
+While data flows through:
+
+```text
+Data source
+    ↓
+State/data layer
+    ↓
+Pages/features
+    ↓
+Components
+    ↓
+UI
+```
+
+---
+
+# 8.15 What We Are NOT Adding
+
+At this point, we deliberately **do not need**:
+
+```text
+Redux
+Zustand
+Context everywhere
+Custom state-management framework
+Backend
+Database
+Authentication
+WebSockets
+```
+
+We will only introduce a tool when the project gives us a real reason.
+
+That's important for your learning.
+
+---
+
+# 8.16 Architecture Decisions Completed
+
+So far:
+
+### Decision 1
+
+**Pages compose meaningful components.** ✅
+
+### Decision 2
+
+**State lives at an appropriate common owner, not inside individual UI items.** ✅
+
+### Decision 3
+
+**Clear source of truth; derive values instead of duplicating state unnecessarily.** ✅
+
+### Decision 4
+
+**Shared application shell using layout + route content.** ✅
+
+### Decision 5
+
+**Organize functionality around feature boundaries.** ✅
+
+---
+
+# NEXT: STEP 9 — PAGE / COMPONENT BOUNDARIES
+
+Now we have enough architectural principles to make the **actual component map**.
+
+We'll take the screens one by one:
+
+```text
+Dashboard
+Projects
+Project Details
+Task Details
+Activity
+Analytics
+Profile
+Settings
+```
+
+and decide:
+
+> **What should each page contain, and which pieces deserve to become components?**
+
+This is the **last major architecture-design step before we get into state/data structure and folder structure.**
+
+We keep moving sequentially. No going back into another planning loop.
+

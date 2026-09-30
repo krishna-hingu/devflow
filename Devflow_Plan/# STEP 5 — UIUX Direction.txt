@@ -1,0 +1,603 @@
+# STEP 5 — UI/UX Direction
+
+Step 4 is complete. ✅
+
+Now we're defining **how DevFlow should feel and behave visually**.
+
+We're not designing every screen in detail yet. We're establishing the UI/UX rules that all screens will follow.
+
+---
+
+## 5.1 Product Personality
+
+DevFlow should feel like:
+
+> **A professional workspace that a developer could genuinely use every day.**
+
+### Design keywords
+
+```text
+Clean
+Focused
+Modern
+Technical
+Calm
+Professional
+Efficient
+```
+
+Not:
+
+```text
+Flashy
+Over-animated
+Gradient-heavy
+Glassmorphism-heavy
+Crowded
+```
+
+The UI should communicate information first and decoration second.
+
+---
+
+# 5.2 Overall Application Shell
+
+The primary application experience will use:
+
+```text
+┌──────────────┬───────────────────────────────────┐
+│              │                                   │
+│   DEVFLOW    │         Top Header                │
+│              │                                   │
+│ Dashboard    │                                   │
+│ Projects     │         Page Content              │
+│ Activity     │                                   │
+│ Analytics    │                                   │
+│              │                                   │
+│ ─────────    │                                   │
+│ Profile      │                                   │
+│ Settings     │                                   │
+│              │                                   │
+└──────────────┴───────────────────────────────────┘
+```
+
+So the application has two primary regions:
+
+### Navigation
+
+Persistent application navigation.
+
+### Main content
+
+Changes according to the current route.
+
+This distinction will become important later when we design our React layout architecture.
+
+---
+
+# 5.3 Navigation UX
+
+Primary navigation:
+
+```text
+Dashboard
+Projects
+Activity
+Analytics
+```
+
+Secondary/account navigation:
+
+```text
+Profile
+Settings
+```
+
+The currently active page should be visually identifiable.
+
+For example:
+
+```text
+Dashboard      ← active
+Projects
+Activity
+Analytics
+```
+
+We shouldn't rely only on color to communicate active state.
+
+We'll use combinations such as:
+
+```text
+Background
+Typography
+Icon
+Border/indicator
+```
+
+where appropriate.
+
+---
+
+# 5.4 Header
+
+The application header should provide contextual information and useful actions.
+
+Potential structure:
+
+```text
+┌──────────────────────────────────────────────────┐
+│ Page title          Search        Actions  User │
+└──────────────────────────────────────────────────┘
+```
+
+Depending on the page, the header may contain:
+
+* Page title
+* Breadcrumb/context
+* Search
+* Primary action
+* User/profile access
+
+We won't force the exact same header content onto every page.
+
+---
+
+# 5.5 Dashboard UX
+
+The Dashboard should answer:
+
+> **"What should I know about my work right now?"**
+
+Information hierarchy:
+
+```text
+1. Page context
+        ↓
+2. Important summary
+        ↓
+3. Current work
+        ↓
+4. Recent activity
+        ↓
+5. Productivity information
+```
+
+For example:
+
+```text
+Dashboard
+
+Good morning
+Here's what's happening with your work.
+
+[ Projects ] [ Open Tasks ] [ Completed ] [ Progress ]
+
+Your Projects
+────────────────────────────
+
+Recent Activity
+────────────────────────────
+
+Productivity
+────────────────────────────
+```
+
+The exact layout will be designed later.
+
+---
+
+# 5.6 Projects UX
+
+The Projects screen should make it easy to answer:
+
+> **"What projects am I currently working on?"**
+
+Primary action:
+
+```text
++ New Project
+```
+
+Then:
+
+```text
+Search
+Filter
+```
+
+Then project collection.
+
+A project item should communicate enough information to decide whether to open it.
+
+For example:
+
+```text
+Project name
+Description
+Status
+Progress
+Task count
+Due date
+```
+
+We won't cram every piece of data into every card.
+
+---
+
+# 5.7 Project Details UX
+
+Project Details is the user's **work area for one project**.
+
+Hierarchy:
+
+```text
+Project identity
+       ↓
+Project progress
+       ↓
+Project tasks
+       ↓
+Project activity
+```
+
+The primary action should be obvious:
+
+```text
++ Add Task
+```
+
+The user shouldn't have to hunt for it.
+
+---
+
+# 5.8 Task UX
+
+Tasks should be quick to understand.
+
+A task representation should communicate:
+
+```text
+Title
+Status
+Priority
+Due date
+```
+
+Actions should be predictable:
+
+```text
+Complete
+Edit
+Delete
+Open
+```
+
+We should avoid hiding essential actions behind five levels of menus.
+
+---
+
+# 5.9 Forms
+
+Forms are important because they will give us practical React state/form experience.
+
+Every form should have:
+
+```text
+Label
+Input
+Validation
+Helpful feedback
+Submit action
+Cancel/reset where appropriate
+```
+
+Example:
+
+```text
+Project name *
+[________________________]
+
+Description
+[________________________]
+[________________________]
+
+Status
+[ Select status ▼ ]
+
+             Cancel   Create Project
+```
+
+Errors should appear near the relevant field rather than only as a generic message.
+
+---
+
+# 5.10 UI States
+
+This is a **core UX rule** for DevFlow.
+
+Every important data-driven screen should consider:
+
+### Loading
+
+```text
+Loading projects...
+```
+
+Prefer a meaningful loading treatment rather than leaving a blank screen.
+
+### Empty
+
+```text
+No projects yet.
+
+Create your first project to get started.
+
+[ Create Project ]
+```
+
+### Error
+
+```text
+We couldn't load your projects.
+
+[ Try Again ]
+```
+
+### Success
+
+After an action:
+
+```text
+Project created successfully.
+```
+
+These states are part of the design, not something we'll bolt on at the end.
+
+---
+
+# 5.11 Interaction States
+
+Interactive elements should communicate their state.
+
+We'll account for:
+
+```text
+Default
+Hover
+Focus
+Active
+Disabled
+Loading
+Error
+Success
+```
+
+Especially important:
+
+### Keyboard focus
+
+A user navigating with a keyboard should be able to understand where they are.
+
+---
+
+# 5.12 Visual Hierarchy
+
+We will use hierarchy intentionally.
+
+For example:
+
+```text
+Page title
+   ↓
+Section title
+   ↓
+Supporting information
+   ↓
+Primary content
+   ↓
+Secondary information
+```
+
+We shouldn't make:
+
+```text
+Everything bold
+Everything huge
+Everything colorful
+```
+
+because then nothing is important.
+
+---
+
+# 5.13 Cards
+
+Cards will be used when they help group related information.
+
+Good:
+
+```text
+Project
+┌──────────────────────┐
+│ DevFlow              │
+│ Developer workspace  │
+│                      │
+│ Progress ███████░    │
+│ 12 tasks             │
+└──────────────────────┘
+```
+
+Bad:
+
+```text
+Every single sentence
+inside its own card
+inside another card
+inside another card
+```
+
+Cards are a grouping tool, not a default styling requirement.
+
+---
+
+# 5.14 Responsive UX
+
+We're going to design for three practical ranges.
+
+### Desktop
+
+```text
+Sidebar
++
+Main content
+```
+
+### Tablet
+
+```text
+Reduced navigation
++
+Main content
+```
+
+### Mobile
+
+```text
+Top/mobile navigation
+        ↓
+Full-width content
+```
+
+Important rule:
+
+**Mobile is not an afterthought.**
+
+We will consider mobile behavior while building each major UI rather than finishing desktop and discovering later that everything breaks.
+
+---
+
+# 5.15 Accessibility
+
+Our UI rules include:
+
+* Semantic HTML
+* Proper buttons instead of clickable `div`s
+* Labels for inputs
+* Keyboard navigation
+* Visible focus states
+* Meaningful text
+* Appropriate heading hierarchy
+* Sufficient contrast
+* Accessible interactive controls
+
+We're not treating accessibility as a separate "checkbox" at the very end.
+
+---
+
+# 5.16 Animation
+
+For the MVP:
+
+**Subtle animation only.**
+
+Examples:
+
+```text
+Hover transitions
+Button feedback
+Sidebar transitions
+Modal transitions
+Small state changes
+```
+
+No:
+
+```text
+Huge page animations
+Everything flying onto the screen
+Continuous motion
+```
+
+Framer Motion belongs later in the roadmap, so we're not making animation a major concern now.
+
+---
+
+# 5.17 UI/UX Principle for DevFlow
+
+The main rule is:
+
+> **Every visual decision should make the application easier to understand or use.**
+
+Not:
+
+> "Because Tailwind can do it."
+
+Not:
+
+> "Because it looks cool."
+
+Not:
+
+> "Because SaaS websites usually have it."
+
+---
+
+# 🔒 STEP 5 CHECKPOINT
+
+We've now established the UI/UX direction:
+
+```text
+Product personality
+        ↓
+Application shell
+        ↓
+Navigation
+        ↓
+Header
+        ↓
+Dashboard hierarchy
+        ↓
+Project UX
+        ↓
+Task UX
+        ↓
+Forms
+        ↓
+Loading/empty/error/success
+        ↓
+Interaction states
+        ↓
+Responsive behavior
+        ↓
+Accessibility
+        ↓
+Animation principles
+```
+
+# ✅ STEP 5 — UI/UX DIRECTION COMPLETE
+
+We don't need to keep discussing general UI philosophy.
+
+---
+
+# STEP 6 — DESIGN SYSTEM
+
+Now we move to the **actual visual foundation**:
+
+* Typography
+* Color system
+* Spacing
+* Border radius
+* Shadows/borders
+* Buttons
+* Inputs
+* Badges
+* Cards
+* Other foundational UI patterns
+
+We'll make these decisions **once**, then use them throughout DevFlow instead of inventing styles page by page.
+
+After Step 6, we'll move to responsive strategy → architecture → then **finally coding**.
+
+**Step 6 is the only thing we work on next.**

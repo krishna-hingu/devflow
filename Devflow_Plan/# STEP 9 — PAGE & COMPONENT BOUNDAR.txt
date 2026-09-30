@@ -1,0 +1,567 @@
+# STEP 9 — PAGE & COMPONENT BOUNDARIES
+
+We already know the architecture principles. Now let's convert them into the actual DevFlow structure.
+
+---
+
+## 9.1 Application Shell
+
+Shared across the main application:
+
+```text
+AppLayout
+├── Sidebar
+├── Header
+└── Main
+    └── Outlet
+```
+
+Inside `Outlet`, the current route renders.
+
+---
+
+# 9.2 Dashboard
+
+```text
+Dashboard
+├── PageHeader
+├── SummaryCards
+│   ├── ProjectCount
+│   ├── OpenTasks
+│   ├── CompletedTasks
+│   └── CompletionRate
+├── ProductivityOverview
+├── RecentProjects
+└── RecentActivity
+```
+
+Dashboard **coordinates** these pieces.
+
+It shouldn't implement every card internally.
+
+---
+
+# 9.3 Projects
+
+```text
+Projects
+├── PageHeader
+├── ProjectToolbar
+│   ├── Search
+│   └── Filter
+└── ProjectList
+    └── ProjectCard
+```
+
+Project creation/editing can later use:
+
+```text
+ProjectForm
+```
+
+---
+
+# 9.4 Project Details
+
+```text
+ProjectDetails
+├── ProjectHeader
+├── ProjectProgress
+├── ProjectStats
+├── ProjectTaskList
+│   └── TaskItem
+└── ProjectActivity
+```
+
+This is one of our main React architecture practice areas.
+
+---
+
+# 9.5 Task Details
+
+```text
+TaskDetails
+├── TaskHeader
+├── TaskDescription
+├── TaskMetadata
+├── TaskActions
+└── TaskActivity
+```
+
+The page owns the overall composition.
+
+---
+
+# 9.6 Activity
+
+```text
+Activity
+├── PageHeader
+├── ActivityFilters
+└── ActivityList
+    └── ActivityItem
+```
+
+---
+
+# 9.7 Analytics
+
+```text
+Analytics
+├── PageHeader
+├── AnalyticsFilters
+├── MetricCards
+├── ProductivityChart
+└── ProjectPerformance
+```
+
+We won't introduce a chart library yet. We'll decide that when we actually reach this feature.
+
+---
+
+# 9.8 Profile
+
+```text
+Profile
+├── ProfileHeader
+├── ProfileInformation
+└── ProfilePreferences
+```
+
+---
+
+# 9.9 Settings
+
+```text
+Settings
+├── SettingsNavigation
+├── AccountSettings
+├── AppearanceSettings
+└── NotificationSettings
+```
+
+We don't necessarily need all these sections in the MVP. They're component boundaries, not promises that every feature must be fully implemented.
+
+---
+
+# 9.10 Shared UI
+
+Across the application:
+
+```text
+Button
+Input
+Select
+Modal
+Card
+Badge
+Avatar
+Dropdown
+EmptyState
+LoadingState
+ErrorState
+```
+
+And shared application components:
+
+```text
+Sidebar
+Header
+PageHeader
+```
+
+---
+
+# 9.11 Important Boundary Rule
+
+We now have three levels:
+
+```text
+PAGE
+ ↓
+FEATURE COMPONENT
+ ↓
+SHARED UI
+```
+
+Example:
+
+```text
+ProjectDetails
+      ↓
+ProjectTaskList
+      ↓
+TaskItem
+      ↓
+Button / Badge
+```
+
+This gives us a practical component architecture without exploding the project into hundreds of files.
+
+---
+
+# 9.12 Component Map — LOCKED
+
+```text
+DEVFLOW
+│
+├── Application Shell
+│   ├── AppLayout
+│   ├── Sidebar
+│   └── Header
+│
+├── Pages
+│   ├── Landing
+│   ├── Dashboard
+│   ├── Projects
+│   ├── ProjectDetails
+│   ├── TaskDetails
+│   ├── Activity
+│   ├── Analytics
+│   ├── Profile
+│   └── Settings
+│
+├── Project Feature
+│   ├── ProjectCard
+│   ├── ProjectList
+│   ├── ProjectHeader
+│   ├── ProjectProgress
+│   └── ProjectForm
+│
+├── Task Feature
+│   ├── TaskItem
+│   ├── TaskList
+│   ├── TaskForm
+│   └── TaskMetadata
+│
+├── Activity Feature
+│   ├── ActivityList
+│   └── ActivityItem
+│
+└── Shared UI
+    ├── Button
+    ├── Input
+    ├── Card
+    ├── Badge
+    ├── Modal
+    ├── EmptyState
+    ├── LoadingState
+    └── ErrorState
+```
+
+We can adjust a component if implementation shows that the boundary isn't useful. **Architecture is a tool, not a religion.**
+
+---
+
+# STEP 10 — DATA MODEL
+
+Now we need to decide **what information DevFlow actually works with**.
+
+This is important before coding because our UI shouldn't be built around random fake objects.
+
+We'll start with four core entities:
+
+```text
+User
+Project
+Task
+Activity
+```
+
+### User
+
+```js
+{
+  id,
+  name,
+  email,
+  avatar
+}
+```
+
+### Project
+
+```js
+{
+  id,
+  name,
+  description,
+  status,
+  progress,
+  createdAt
+}
+```
+
+### Task
+
+```js
+{
+  id,
+  projectId,
+  title,
+  description,
+  status,
+  priority,
+  dueDate,
+  createdAt
+}
+```
+
+### Activity
+
+```js
+{
+  id,
+  projectId,
+  taskId,
+  type,
+  message,
+  createdAt
+}
+```
+
+The relationships matter:
+
+```text
+Project
+   │
+   └── projectId
+          ↑
+         Task
+
+Project
+   │
+   └── projectId
+          ↑
+       Activity
+```
+
+This prepares us for the API/database thinking you'll encounter later in Phase 3.
+
+---
+
+# STEP 11 — STATE STRATEGY
+
+We'll keep state simple initially.
+
+### Local UI state
+
+Things such as:
+
+```text
+Modal open/closed
+Search input
+Selected filter
+Form fields
+Dropdown open/closed
+```
+
+→ local component state.
+
+### Feature/application data
+
+Things such as:
+
+```text
+Projects
+Tasks
+Activities
+```
+
+→ centralized enough that multiple components can consume/update them cleanly.
+
+For MVP, we'll start with a **frontend data layer + React state**, rather than adding Zustand.
+
+If the project genuinely outgrows that approach, we'll evaluate it then.
+
+---
+
+# STEP 12 — ROUTING MAP
+
+Now we can finally make the routes concrete:
+
+```text
+/
+└── Landing
+
+/dashboard
+└── Dashboard
+
+/projects
+└── Projects
+
+/projects/:projectId
+└── ProjectDetails
+
+/projects/:projectId/tasks/:taskId
+└── TaskDetails
+
+/activity
+└── Activity
+
+/analytics
+└── Analytics
+
+/profile
+└── Profile
+
+/settings
+└── Settings
+
+/*
+└── NotFound
+```
+
+Application routes will live under:
+
+```text
+AppLayout
+    ↓
+Outlet
+```
+
+---
+
+# STEP 13 — MVP SCOPE
+
+We need to control scope.
+
+### MUST HAVE
+
+```text
+Landing
+Dashboard
+Projects
+Project Details
+Tasks
+Task CRUD interactions
+Search/filter
+Responsive navigation
+Loading/error/empty states
+Activity
+Basic analytics
+Profile
+Settings
+Routing
+```
+
+### SHOULD HAVE
+
+```text
+Good empty states
+Form validation
+Responsive transformations
+Accessible interactions
+Persistent local data
+Polished UX
+```
+
+### NOT NOW
+
+```text
+Authentication backend
+Real database
+Real-time collaboration
+Socket.io
+AI assistant
+Advanced analytics
+Complex permissions
+Team management
+```
+
+Those belong to future iterations.
+
+---
+
+# STEP 14 — DEVELOPMENT ORDER
+
+This is our actual execution sequence:
+
+```text
+1. Project setup
+        ↓
+2. Tailwind setup + learn it
+        ↓
+3. Design tokens/base styles
+        ↓
+4. App shell
+        ↓
+5. Routing
+        ↓
+6. Landing page
+        ↓
+7. Dashboard
+        ↓
+8. Projects
+        ↓
+9. Project Details
+        ↓
+10. Tasks + CRUD
+        ↓
+11. Activity
+        ↓
+12. Analytics
+        ↓
+13. Profile / Settings
+        ↓
+14. Responsive refinement
+        ↓
+15. UX/accessibility
+        ↓
+16. Refactor
+        ↓
+17. Test/debug
+        ↓
+18. Git + deployment
+```
+
+This is now our **execution plan**.
+
+We are done with the major planning loop.
+
+---
+
+# 🏁 ARCHITECTURE PHASE COMPLETE
+
+We have now established:
+
+```text
+Product
+     ✅
+MVP
+     ✅
+User flows
+     ✅
+Screens
+     ✅
+UI/UX
+     ✅
+Design system
+     ✅
+Responsive strategy
+     ✅
+Component architecture
+     ✅
+Data model
+     ✅
+State strategy
+     ✅
+Routing
+     ✅
+MVP scope
+     ✅
+Execution order
+     ✅
+```
+
+## Next: WE BUILD.
+
+### STEP 15 — Project Setup + Tailwind
+
+This is where the theoretical part ends.
+
+We'll open your React project, set up the actual DevFlow application, and **I'll teach Tailwind while we use it**.
+
+No more architecture planning after this unless we encounter a real architectural problem.
+
+**Next message: we start Step 15 — setup.**

@@ -1,0 +1,498 @@
+# STEP 3 — User Flows
+
+Step 2 is now complete. ✅
+
+Now we only define **how a user moves through DevFlow**.
+
+We are not touching:
+
+* Architecture
+* Folder structure
+* Components
+* Tailwind
+* Code
+* Database
+
+The goal is simply to understand the user's journey.
+
+---
+
+# 3.1 Entry Flow
+
+A user enters DevFlow.
+
+```text
+Landing Page
+      ↓
+   Get Started
+      ↓
+   Dashboard
+```
+
+For our MVP, the landing page is mainly an entry point. The actual application begins at the Dashboard.
+
+---
+
+# 3.2 Main Dashboard Flow
+
+The Dashboard is the user's starting point inside the application.
+
+```text
+Dashboard
+   │
+   ├── View projects
+   ├── View task summary
+   ├── View recent activity
+   ├── View productivity information
+   │
+   ├── → Projects
+   ├── → Activity
+   └── → Analytics
+```
+
+The dashboard should answer quickly:
+
+> **"What is happening with my work right now?"**
+
+---
+
+# 3.3 Project Flow
+
+This is one of our most important flows.
+
+```text
+Dashboard
+    ↓
+Projects
+    ↓
+View project list
+    ↓
+Select project
+    ↓
+Project Details
+```
+
+From Projects, the user can also:
+
+```text
+Projects
+   ├── Search
+   ├── Filter
+   ├── Create project
+   └── Open project
+```
+
+---
+
+# 3.4 Create Project Flow
+
+```text
+Projects
+    ↓
+Create Project
+    ↓
+Project Form
+    ↓
+Enter information
+    ↓
+Submit
+    ↓
+Validation
+    ↓
+Project Created
+    ↓
+Projects list updated
+```
+
+If something is wrong:
+
+```text
+Submit
+  ↓
+Validation fails
+  ↓
+Show error
+  ↓
+User corrects input
+```
+
+This will eventually give us a practical reason to work with React controlled forms and validation.
+
+---
+
+# 3.5 Project Details Flow
+
+Once the user opens a project:
+
+```text
+Projects
+    ↓
+Project Details
+    │
+    ├── Project overview
+    ├── Progress
+    ├── Tasks
+    └── Recent activity
+```
+
+From there:
+
+```text
+Project Details
+      ↓
+   Select Task
+      ↓
+  Task Details
+```
+
+Or:
+
+```text
+Project Details
+      ↓
+   Create Task
+```
+
+---
+
+# 3.6 Task Creation Flow
+
+```text
+Project Details
+      ↓
+   Add Task
+      ↓
+   Task Form
+      ↓
+Enter task information
+      ↓
+    Submit
+      ↓
+   Validate
+      ↓
+ Task Created
+      ↓
+Task list updates
+      ↓
+Project progress updates
+```
+
+Notice something important here.
+
+Creating a task can affect **multiple parts of the application**:
+
+```text
+Task List
+    +
+Project Progress
+    +
+Dashboard statistics
+    +
+Activity
+```
+
+We aren't solving that technically yet.
+
+But identifying this now is exactly why we are doing user flows **before architecture**.
+
+---
+
+# 3.7 Task Management Flow
+
+From a project:
+
+```text
+Project
+   ↓
+Task List
+```
+
+Then:
+
+```text
+Task
+ ├── Complete
+ ├── Edit
+ ├── Delete
+ └── Open
+```
+
+### Complete
+
+```text
+Open Task
+   ↓
+Mark Complete
+   ↓
+Task status changes
+   ↓
+Project progress changes
+   ↓
+Dashboard statistics change
+   ↓
+Activity recorded
+```
+
+### Edit
+
+```text
+Task
+ ↓
+Edit
+ ↓
+Form
+ ↓
+Update
+ ↓
+Task list reflects changes
+```
+
+### Delete
+
+```text
+Task
+ ↓
+Delete
+ ↓
+Confirmation
+ ↓
+Task removed
+ ↓
+Related UI updates
+```
+
+---
+
+# 3.8 Task Details Flow
+
+```text
+Project
+   ↓
+Task
+   ↓
+Task Details
+```
+
+The user sees:
+
+```text
+Title
+Description
+Status
+Priority
+Due date
+Project
+```
+
+And can:
+
+```text
+Edit
+Complete
+Delete
+Return to project
+```
+
+---
+
+# 3.9 Activity Flow
+
+Activity is not an isolated feature.
+
+It represents things that happened elsewhere.
+
+For example:
+
+```text
+Create Project
+       ↓
+Activity
+
+Create Task
+       ↓
+Activity
+
+Complete Task
+       ↓
+Activity
+
+Update Task
+       ↓
+Activity
+```
+
+The user can then:
+
+```text
+Dashboard
+    ↓
+Activity
+    ↓
+Review recent work
+```
+
+---
+
+# 3.10 Analytics Flow
+
+```text
+Dashboard
+    ↓
+Analytics
+    ↓
+View productivity information
+```
+
+Analytics should derive meaning from the application's work data.
+
+For example:
+
+```text
+Projects
+Tasks
+Completed tasks
+Activity
+       ↓
+Productivity information
+```
+
+Again, we're not deciding implementation yet.
+
+---
+
+# 3.11 Profile Flow
+
+```text
+Dashboard
+    ↓
+Profile
+    ↓
+View profile
+    ↓
+Edit profile
+    ↓
+Save
+```
+
+---
+
+# 3.12 Settings Flow
+
+```text
+Dashboard
+    ↓
+Settings
+    ↓
+Preferences
+    ↓
+Change setting
+    ↓
+Save / Apply
+```
+
+---
+
+# 3.13 Complete Core User Journey
+
+Now combine the important pieces:
+
+```text
+                         DEVFLOW
+                            │
+                         Dashboard
+                            │
+          ┌─────────────────┼─────────────────┐
+          ↓                 ↓                 ↓
+      Projects           Activity          Analytics
+          │
+          ↓
+    Project Details
+          │
+          ├───────────────┐
+          ↓               ↓
+      Task List       Project Info
+          │
+          ↓
+      Task Details
+          │
+     ┌────┼─────┐
+     ↓    ↓     ↓
+    Edit Complete Delete
+     │    │       │
+     └────┴───────┘
+          ↓
+     Application
+        updates
+```
+
+And the account area:
+
+```text
+Dashboard
+    │
+    ├── Profile
+    │
+    └── Settings
+```
+
+---
+
+# 3.14 The Most Important Flow
+
+If we had to demonstrate DevFlow to someone in two minutes, we'd show:
+
+```text
+Dashboard
+    ↓
+Projects
+    ↓
+Open project
+    ↓
+Create task
+    ↓
+Complete task
+    ↓
+Project progress changes
+    ↓
+Dashboard statistics change
+    ↓
+Activity records the action
+```
+
+That is the **core product loop**.
+
+If that loop feels good, DevFlow feels like a real application.
+
+---
+
+# 🔒 STEP 3 CHECKPOINT
+
+We've now defined:
+
+* Entry flow
+* Dashboard flow
+* Project flow
+* Project creation
+* Project details
+* Task creation
+* Task management
+* Task details
+* Activity
+* Analytics
+* Profile
+* Settings
+* Core product loop
+
+### The central loop is:
+
+> **View work → manage work → complete work → see progress/activity update.**
+
+---
+
+# ✅ STEP 3 — USER FLOWS COMPLETE
+
+We don't need to keep planning user flows.
+
+**Next is Step 4 — Page / Screen Map.**
+
+There we'll turn these flows into the actual screens DevFlow needs, one by one.

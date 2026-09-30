@@ -23,7 +23,6 @@ const navigationItems = [
 ];
 
 function Sidebar() {
-  console.log(window.location.pathname);
   return (
     <aside className="w-64 min-h-screen bg-devflow-sidebar border-r border-devflow-border">
       <div className="px-6 py-5">

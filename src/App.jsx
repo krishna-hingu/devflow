@@ -5,6 +5,8 @@ import Analytics from "./pages/Analytics";
 import Dashboard from "./pages/Dashboard";
 import Projects from "./pages/Projects";
 import Tasks from "./pages/Tasks";
+import NotFound from "./pages/NotFound";
+import ProjectDetails from "./pages/ProjectDetails";
 function App() {
   return (
     <Routes>
@@ -14,7 +16,9 @@ function App() {
         <Route path="analytics" element={<Analytics />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="projects" element={<Projects />} />
+        <Route path="projects/:projectId" element={<ProjectDetails />} />
         <Route path="tasks" element={<Tasks />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

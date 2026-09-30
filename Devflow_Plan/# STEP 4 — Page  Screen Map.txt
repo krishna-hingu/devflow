@@ -1,0 +1,348 @@
+# STEP 4 — Page / Screen Map
+
+Step 3 is complete. ✅
+
+Now we're doing **one thing only**:
+
+> Turn the user flows into the actual screens/pages that DevFlow needs.
+
+No folder structure.
+No components.
+No state architecture.
+No coding.
+
+---
+
+## 4.1 Public Area
+
+### `/` — Landing Page
+
+Purpose:
+
+Introduce DevFlow and provide entry into the application.
+
+Main content:
+
+```text
+DevFlow
+   ↓
+What it does
+   ↓
+Key benefits/features
+   ↓
+Get Started
+```
+
+For our MVP, this is intentionally simple.
+
+---
+
+# 4.2 Main Application
+
+## `/dashboard` — Dashboard
+
+**Purpose:** Give the developer an immediate overview of their work.
+
+Contains concepts such as:
+
+```text
+Overview
+Projects summary
+Task summary
+Progress
+Recent activity
+Productivity snapshot
+```
+
+This is the primary home screen.
+
+---
+
+## `/projects` — Projects
+
+**Purpose:** Manage and browse projects.
+
+The screen needs to support:
+
+```text
+Project list
+Search
+Create project
+Open project
+Project status/progress
+```
+
+---
+
+## `/projects/:projectId` — Project Details
+
+**Purpose:** Work inside a specific project.
+
+Contains:
+
+```text
+Project information
+Project progress
+Task list
+Task actions
+Recent project activity
+```
+
+This is one of the most important screens because it connects **projects → tasks**.
+
+---
+
+## `/projects/:projectId/tasks/:taskId` — Task Details
+
+**Purpose:** Focus on one task.
+
+Contains:
+
+```text
+Task information
+Status
+Priority
+Due date
+Description
+Project reference
+Actions
+```
+
+Actions:
+
+```text
+Edit
+Complete
+Delete
+Back
+```
+
+---
+
+# 4.3 Productivity Area
+
+## `/activity` — Activity
+
+**Purpose:** Show what has happened in the application.
+
+Examples:
+
+```text
+Task completed
+Task created
+Project created
+Task updated
+Project updated
+```
+
+The activity screen should feel connected to actual application actions.
+
+---
+
+## `/analytics` — Analytics
+
+**Purpose:** Help the developer understand progress/productivity.
+
+MVP information:
+
+```text
+Task completion
+Project progress
+Completed vs remaining work
+Basic trends
+```
+
+We intentionally keep this screen simple for now.
+
+---
+
+# 4.4 Account Area
+
+## `/profile` — Profile
+
+**Purpose:** View/edit developer profile information.
+
+Possible information:
+
+```text
+Name
+Email
+Avatar
+Role
+```
+
+---
+
+## `/settings` — Settings
+
+**Purpose:** Manage application preferences.
+
+Initial sections can include:
+
+```text
+Appearance
+Notifications
+Preferences
+```
+
+---
+
+# 4.5 System Screen
+
+## `*` — Not Found
+
+If the user enters an invalid route:
+
+```text
+404
+Page not found
+Back to Dashboard
+```
+
+This is part of a complete frontend application.
+
+---
+
+# 4.6 Final MVP Screen Map
+
+So our initial screen map becomes:
+
+```text
+PUBLIC
+│
+└── /
+    Landing
+
+
+APPLICATION
+│
+├── /dashboard
+│   Dashboard
+│
+├── /projects
+│   Projects
+│
+├── /projects/:projectId
+│   Project Details
+│
+├── /projects/:projectId/tasks/:taskId
+│   Task Details
+│
+├── /activity
+│   Activity
+│
+├── /analytics
+│   Analytics
+│
+├── /profile
+│   Profile
+│
+├── /settings
+│   Settings
+│
+└── *
+    Not Found
+```
+
+---
+
+# 4.7 One Important Observation
+
+Notice what happened.
+
+Our user flow started with:
+
+```text
+Projects
+→ Project
+→ Tasks
+→ Task
+```
+
+And now we've translated that into:
+
+```text
+/projects
+/projects/:projectId
+/projects/:projectId/tasks/:taskId
+```
+
+We're **not implementing those routes yet**.
+
+We're simply establishing what screens exist.
+
+This will make the next architecture step much easier.
+
+---
+
+# 4.8 Are All These Screens Actually Necessary?
+
+For the MVP, yes — but some are deliberately lightweight.
+
+### Core screens
+
+```text
+Dashboard
+Projects
+Project Details
+Task Details
+```
+
+### Supporting screens
+
+```text
+Activity
+Analytics
+```
+
+### Account screens
+
+```text
+Profile
+Settings
+```
+
+### System
+
+```text
+Not Found
+```
+
+### Public
+
+```text
+Landing
+```
+
+This gives us enough surface area to practice React application architecture without creating dozens of unnecessary pages.
+
+---
+
+# 🔒 STEP 4 CHECKPOINT
+
+Our MVP now has **10 route/screen destinations**:
+
+| #  | Route                                | Screen          | Importance |
+| -- | ------------------------------------ | --------------- | ---------- |
+| 1  | `/`                                  | Landing         | Entry      |
+| 2  | `/dashboard`                         | Dashboard       | Core       |
+| 3  | `/projects`                          | Projects        | Core       |
+| 4  | `/projects/:projectId`               | Project Details | Core       |
+| 5  | `/projects/:projectId/tasks/:taskId` | Task Details    | Core       |
+| 6  | `/activity`                          | Activity        | Supporting |
+| 7  | `/analytics`                         | Analytics       | Supporting |
+| 8  | `/profile`                           | Profile         | Account    |
+| 9  | `/settings`                          | Settings        | Account    |
+| 10 | `*`                                  | Not Found       | System     |
+
+---
+
+# ✅ STEP 4 — PAGE / SCREEN MAP COMPLETE
+
+Now we move to:
+
+# **STEP 5 — UI/UX Direction**
+
+This is where we'll decide **how these screens should actually behave and feel**.
+
+We'll do that sequentially rather than designing all 10 screens at once.
