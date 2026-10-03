@@ -8,7 +8,7 @@ function AppLayout() {
       <Sidebar />
       <div className="flex-1">
         <Header />
-        <main>
+        <main className="min-h-screen bg-devflow-background p-6">
           <Outlet />
         </main>
       </div>
