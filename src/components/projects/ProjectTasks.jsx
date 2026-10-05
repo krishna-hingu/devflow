@@ -1,4 +1,5 @@
-function ProjectTasks({ tasks }) {
+import { Link } from "react-router-dom";
+function ProjectTasks({ tasks, projectId }) {
   return (
     <section className="rounded-xl border border-devflow-border bg-devflow-card p-6">
       <div className="mb-5 flex items-center justify-between">
@@ -16,7 +17,8 @@ function ProjectTasks({ tasks }) {
       </div>
       <div>
         {tasks.map((task) => (
-          <div
+          <Link
+            to={`/projects/${projectId}/tasks/${task.id}`}
             key={task.id}
             className="flex items-start justify-between gap-6 border-b border-devflow-border py-4"
           >
@@ -39,9 +41,11 @@ function ProjectTasks({ tasks }) {
               >
                 {task.priority}
               </span>
-              <span className="text-xs text-devflow-text-muted">Due {task.dueDate}</span>
+              <span className="text-xs text-devflow-text-muted">
+                Due {task.dueDate}
+              </span>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

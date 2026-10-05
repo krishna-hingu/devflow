@@ -12,12 +12,12 @@ function ProjectDetails() {
   if (!project) {
     return <h1>Project Not Found</h1>;
   }
-  const projectTasks = tasks.filter((task) => task.projectId === project.id)
+  const projectTasks = tasks.filter((task) => task.projectId === project.id);
   return (
     <>
-        <ProjectHeader project={project}/>
-        <ProjectProgress project={project} />
-        <ProjectTasks tasks={projectTasks} />
+      <ProjectHeader project={project} />
+      <ProjectProgress project={project} />
+      <ProjectTasks tasks={projectTasks} projectId={projectId} />
     </>
   );
 }
