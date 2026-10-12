@@ -1,10 +1,12 @@
-import { useParams } from "react-router-dom";
+import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import tasks from "../data/tasks";
 import projects from "../data/projects";
 
 function TaskDetails() {
+  const [taskList, setTaskList] = useState(tasks);
   const { projectId, taskId } = useParams();
-  const task = tasks.find(
+  const task = taskList.find(
     (task) =>
       task.id === Number(taskId) && task.projectId === Number(projectId),
   );
@@ -12,6 +14,19 @@ function TaskDetails() {
     return <h1>No Task Found</h1>;
   }
   const project = projects.find((project) => project.id === task.projectId);
+  const handleCompleteTask = () => {
+    setTaskList((currentTask) =>
+      currentTask.map((item) => {
+        if (item.id === task.id) {
+          return {
+            ...item,
+            status: "Completed",
+          };
+        }
+        return item;
+      }),
+    );
+  };
   return (
     <main className="mx-auto max-w-4xl">
       <section className="rounded-xl border border-devflow-border bg-devflow-card p-6">
@@ -51,6 +66,25 @@ function TaskDetails() {
             <p className="mt-1 text-sm font-medium text-devflow-text">
               {project.name}
             </p>
+          </div>
+        </div>
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-devflow-border pt-5">
+          <Link
+            to={`/projects/${project.id}`}
+            className="rounded-lg px-3 py-2 text-sm font-medium text-devflow-text-muted hover:bg-devflow-background hover:text-devflow-text"
+          >
+            ← Return to Project
+          </Link>
+          <div className="flex flex-wrap items-center gap-3">
+            <button className="rounded-lg border border-devflow-border px-4 py-2 text-sm font-medium text-devflow-text hover:bg-devflow-background">
+              Edit
+            </button>
+            <button className="rounded-lg bg-devflow-blue px-4 py-2 text-sm font-medium text-white hover:bg-devflow-blue-hover" onClick={handleCompleteTask}>
+              Complete Task
+            </button>
+            <button className="rounded-lg border border-devflow-error/40 px-4 py-2 text-sm font-medium text-devflow-error hover:bg-devflow-error/10">
+              Delete
+            </button>
           </div>
         </div>
       </section>
