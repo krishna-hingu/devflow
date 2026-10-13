@@ -1,11 +1,16 @@
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import tasks from "../data/tasks";
+import {
+  Link,
+  useParams,
+  useOutletContext,
+  useNavigate,
+} from "react-router-dom";
 import projects from "../data/projects";
 
 function TaskDetails() {
-  const [taskList, setTaskList] = useState(tasks);
+  const { taskList, setTaskList } = useOutletContext();
   const { projectId, taskId } = useParams();
+  const navigate = useNavigate();
+
   const task = taskList.find(
     (task) =>
       task.id === Number(taskId) && task.projectId === Number(projectId),
@@ -13,7 +18,9 @@ function TaskDetails() {
   if (!task) {
     return <h1>No Task Found</h1>;
   }
+
   const project = projects.find((project) => project.id === task.projectId);
+
   const handleCompleteTask = () => {
     setTaskList((currentTask) =>
       currentTask.map((item) => {
@@ -27,6 +34,17 @@ function TaskDetails() {
       }),
     );
   };
+
+  const handleDeleteTask = () => {
+    setTaskList((currentTasks) =>
+      currentTasks.filter((item) => {
+        return item.id !== task.id;
+      }),
+    );
+
+    navigate(`/projects/${projectId}`)
+  };
+
   return (
     <main className="mx-auto max-w-4xl">
       <section className="rounded-xl border border-devflow-border bg-devflow-card p-6">
@@ -79,10 +97,13 @@ function TaskDetails() {
             <button className="rounded-lg border border-devflow-border px-4 py-2 text-sm font-medium text-devflow-text hover:bg-devflow-background">
               Edit
             </button>
-            <button className="rounded-lg bg-devflow-blue px-4 py-2 text-sm font-medium text-white hover:bg-devflow-blue-hover" onClick={handleCompleteTask}>
+            <button
+              className="rounded-lg bg-devflow-blue px-4 py-2 text-sm font-medium text-white hover:bg-devflow-blue-hover"
+              onClick={handleCompleteTask}
+            >
               Complete Task
             </button>
-            <button className="rounded-lg border border-devflow-error/40 px-4 py-2 text-sm font-medium text-devflow-error hover:bg-devflow-error/10">
+            <button onClick={handleDeleteTask} className="rounded-lg border border-devflow-error/40 px-4 py-2 text-sm font-medium text-devflow-error hover:bg-devflow-error/10">
               Delete
             </button>
           </div>
