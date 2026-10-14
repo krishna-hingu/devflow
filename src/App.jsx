@@ -8,6 +8,7 @@ import Tasks from "./pages/Tasks";
 import NotFound from "./pages/NotFound";
 import ProjectDetails from "./pages/ProjectDetails";
 import TaskDetails from "./pages/TaskDetails";
+import EditTask from "./pages/EditTask";
 function App() {
   return (
     <Routes>
@@ -18,7 +19,14 @@ function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="projects" element={<Projects />} />
         <Route path="projects/:projectId" element={<ProjectDetails />} />
-        <Route path="projects/:projectId/tasks/:taskId" element={<TaskDetails />} />
+        <Route
+          path="projects/:projectId/tasks/:taskId"
+          element={<TaskDetails />}
+        />
+        <Route
+          path="projects/:projectId/tasks/:taskId/edit"
+          element={<EditTask />}
+        />
         <Route path="tasks" element={<Tasks />} />
         <Route path="*" element={<NotFound />} />
       </Route>
