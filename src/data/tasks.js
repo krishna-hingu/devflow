@@ -6,7 +6,7 @@ const tasks = [
     description: "Create responsive sidebar navigation for DevFlow.",
     status: "Completed",
     priority: "High",
-    dueDate: "Oct 5, 2026",
+    dueDate: "2026-10-05",
   },
   {
     id: 102,
@@ -16,7 +16,7 @@ const tasks = [
       "Create the project workspace with progress and task sections.",
     status: "In Progress",
     priority: "High",
-    dueDate: "Oct 10, 2026",
+    dueDate: "2026-10-10",
   },
   {
     id: 103,
@@ -26,7 +26,7 @@ const tasks = [
       "Make the DevFlow application work across desktop, tablet, and mobile.",
     status: "Pending",
     priority: "Medium",
-    dueDate: "Oct 15, 2026",
+    dueDate: "2026-10-15",
   },
 
   {
@@ -36,7 +36,7 @@ const tasks = [
     description: "Build the main portfolio landing page.",
     status: "Completed",
     priority: "High",
-    dueDate: "Sep 20, 2026",
+    dueDate: "2026-09-20",
   },
   {
     id: 202,
@@ -45,7 +45,7 @@ const tasks = [
     description: "Display selected projects with descriptions and links.",
     status: "Completed",
     priority: "Medium",
-    dueDate: "Sep 25, 2026",
+    dueDate: "2026-09-25",
   },
 
   {
@@ -55,7 +55,7 @@ const tasks = [
     description: "Fetch current weather information from a public API.",
     status: "In Progress",
     priority: "High",
-    dueDate: "Nov 1, 2026",
+    dueDate: "2026-11-01",
   },
   {
     id: 302,
@@ -64,7 +64,7 @@ const tasks = [
     description: "Allow users to search for weather by city.",
     status: "Pending",
     priority: "Medium",
-    dueDate: "Nov 5, 2026",
+    dueDate: "2026-11-05",
   },
 ];
 

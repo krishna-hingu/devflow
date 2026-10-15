@@ -6,12 +6,12 @@ import { useState } from "react";
 function AppLayout() {
   const [taskList, setTaskList] = useState(tasks);
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex text-devflow-text">
       <Sidebar />
       <div className="flex-1">
         <Header />
         <main className="min-h-screen bg-devflow-background p-6">
-          <Outlet context={{taskList, setTaskList}}/>
+          <Outlet context={{ taskList, setTaskList }} />
         </main>
       </div>
     </div>
