@@ -42,11 +42,11 @@ function TaskDetails() {
       }),
     );
 
-    navigate(`/projects/${projectId}`)
+    navigate(`/projects/${projectId}`);
   };
 
   return (
-    <main className="mx-auto max-w-4xl">
+    <main className="mx-auto max-w-5xl">
       <section className="rounded-xl border border-devflow-border bg-devflow-card p-6">
         <h1 className="text-2xl font-semibold text-devflow-text">
           {task.title}
@@ -94,7 +94,12 @@ function TaskDetails() {
             ← Return to Project
           </Link>
           <div className="flex flex-wrap items-center gap-3">
-            <button className="rounded-lg border border-devflow-border px-4 py-2 text-sm font-medium text-devflow-text hover:bg-devflow-background">
+            <button
+              className="rounded-lg border border-devflow-border px-4 py-2 text-sm font-medium text-devflow-text hover:bg-devflow-background"
+              onClick={() => {
+                navigate(`/projects/${projectId}/tasks/${taskId}/edit`);
+              }}
+            >
               Edit
             </button>
             <button
@@ -103,7 +108,10 @@ function TaskDetails() {
             >
               Complete Task
             </button>
-            <button onClick={handleDeleteTask} className="rounded-lg border border-devflow-error/40 px-4 py-2 text-sm font-medium text-devflow-error hover:bg-devflow-error/10">
+            <button
+              onClick={handleDeleteTask}
+              className="rounded-lg border border-devflow-error/40 px-4 py-2 text-sm font-medium text-devflow-error hover:bg-devflow-error/10"
+            >
               Delete
             </button>
           </div>
