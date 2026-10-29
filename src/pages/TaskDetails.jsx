@@ -1,13 +1,13 @@
 import {
   Link,
   useParams,
-  useOutletContext,
   useNavigate,
 } from "react-router-dom";
-import projects from "../data/projects";
+import { useContext } from "react";
+import DevFlowContext from "../context/DevFlowContext";
 
 function TaskDetails() {
-  const { taskList, setTaskList } = useOutletContext();
+  const { taskList, setTaskList, projectList } = useContext(DevFlowContext);
   const { projectId, taskId } = useParams();
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ function TaskDetails() {
     return <h1>No Task Found</h1>;
   }
 
-  const project = projects.find((project) => project.id === task.projectId);
+  const project = projectList.find((project) => project.id === task.projectId);
 
   const handleCompleteTask = () => {
     setTaskList((currentTask) =>

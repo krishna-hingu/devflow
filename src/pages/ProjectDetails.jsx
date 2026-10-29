@@ -1,5 +1,6 @@
-import { useParams, useOutletContext } from "react-router-dom";
-import projects from "../data/projects";
+import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import DevFlowContext from "../context/DevFlowContext";
 
 import ProjectHeader from "../components/projects/ProjectHeader";
 import ProjectProgress from "../components/projects/ProjectProgress";
@@ -7,8 +8,10 @@ import ProjectTasks from "../components/projects/ProjectTasks";
 
 function ProjectDetails() {
   const { projectId } = useParams();
-  const { taskList } = useOutletContext();
-  const project = projects.find((project) => project.id === Number(projectId));
+  const { taskList, projectList } = useContext(DevFlowContext);
+  const project = projectList.find(
+    (project) => project.id === Number(projectId),
+  );
   if (!project) {
     return <h1>Project Not Found</h1>;
   }

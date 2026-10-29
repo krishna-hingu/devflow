@@ -1,7 +1,9 @@
-import { useState } from "react";
-import { useNavigate, useOutletContext, useParams } from "react-router-dom";
+import { useState, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import DevFlowContext from "../context/DevFlowContext";
+
 function EditTask() {
-  const { taskList, setTaskList } = useOutletContext();
+  const { taskList, setTaskList } = useContext(DevFlowContext);
   const { projectId, taskId } = useParams();
   const navigate = useNavigate();
 

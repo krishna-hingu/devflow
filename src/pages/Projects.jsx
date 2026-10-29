@@ -1,11 +1,12 @@
 import ProjectCard from "../components/projects/ProjectCard";
-import projects from "../data/projects";
+import { useContext } from "react";
+import DevFlowContext from "../context/DevFlowContext";
 function Projects() {
+  const { projectList } = useContext(DevFlowContext);
   return (
     <>
-      <h1>Projects Page</h1>
       <div>
-        {projects.map((project) => {
+        {projectList.map((project) => {
           return <ProjectCard key={project.id} project={project} />;
         })}
       </div>

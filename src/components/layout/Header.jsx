@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import DevFlowContext from "../../context/DevFlowContext";
+
 function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { projectList, taskList } = useContext(DevFlowContext);
+
   return (
     <header className="flex h-16 items-center justify-between border-b border-devflow-border bg-devflow-header px-6">
       <div className="hidden w-full max-w-5xl items-center sm:flex">
