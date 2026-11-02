@@ -8,6 +8,7 @@ function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { projectList, taskList } = useContext(DevFlowContext);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const normalizedQuery = searchQuery.trim().toLowerCase();
 
@@ -243,19 +244,45 @@ function Header() {
       </div>
 
       {/* Profile */}
-      <button
-        type="button"
-        className="ml-4 flex shrink-0 items-center gap-2 rounded-lg border border-devflow-border px-3 py-2 text-sm text-devflow-text transition-colors hover:bg-devflow-card"
-      >
-        <span
-          className="flex h-6 w-6 items-center justify-center rounded-full bg-devflow-blue font-semibold text-white"
-          aria-hidden="true"
+      <div className="relative ml-4">
+        <button
+          type="button"
+          onClick={() => setIsProfileOpen(!isProfileOpen)}
+          aria-expanded={isProfileOpen}
+          className="flex shrink-0 items-center gap-2 rounded-lg border border-devflow-border px-3 py-2 text-sm text-devflow-text transition-colors hover:bg-devflow-card"
         >
-          K
-        </span>
+          <span
+            className="flex h-6 w-6 items-center justify-center rounded-full bg-devflow-blue font-semibold text-white"
+            aria-hidden="true"
+          >
+            K
+          </span>
 
-        <span className="hidden sm:inline">Profile</span>
-      </button>
+          <span className="hidden sm:inline">Profile</span>
+        </button>
+        {isProfileOpen && (
+          <div className="absolute right-0 top-full z-50 mt-2 w-52 rounded-lg border border-devflow-border bg-devflow-card p-2 shadow-xl">
+            <div className="border-b border-devflow-border px-3 py-2">
+              <p className="text-sm font-medium text-devflow-text">Krishna</p>
+              <p className="text-xs text-devflow-text-muted">DevFlow Account</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setIsProfileOpen(false)}
+              className="w-full rounded-md px-3 py-2 text-left text-sm text-devflow-text transition-colors hover:bg-devflow-border"
+            >
+              My Profile
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsProfileOpen(false)}
+              className="w-full rounded-md px-3 py-2 text-left text-sm text-devflow-text transition-colors hover:bg-devflow-border"
+            >
+              Settings
+            </button>
+          </div>
+        )}
+      </div>
     </header>
   );
 }
