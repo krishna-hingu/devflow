@@ -19,7 +19,7 @@ function ProjectDetails() {
   return (
     <>
       <ProjectHeader project={project} />
-      <ProjectProgress project={project} />
+      <ProjectProgress project={project} tasks={projectTasks} />
       <ProjectTasks tasks={projectTasks} projectId={projectId} />
     </>
   );
