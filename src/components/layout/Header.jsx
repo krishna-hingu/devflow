@@ -54,6 +54,16 @@ function Header() {
     }
   }
 
+  function handleSettingsClick() {
+    navigate("/settings");
+    setIsProfileOpen(false);
+  }
+
+  function handleProfileClick() {
+    navigate("/profile");
+    setIsProfileOpen(false);
+  }
+
   return (
     <header className="flex h-16 items-center justify-between border-b border-devflow-border bg-devflow-header px-6">
       {/* Desktop Search */}
@@ -268,14 +278,14 @@ function Header() {
             </div>
             <button
               type="button"
-              onClick={() => setIsProfileOpen(false)}
+              onClick={handleProfileClick}
               className="w-full rounded-md px-3 py-2 text-left text-sm text-devflow-text transition-colors hover:bg-devflow-border"
             >
               My Profile
             </button>
             <button
               type="button"
-              onClick={() => setIsProfileOpen(false)}
+              onClick={handleSettingsClick}
               className="w-full rounded-md px-3 py-2 text-left text-sm text-devflow-text transition-colors hover:bg-devflow-border"
             >
               Settings

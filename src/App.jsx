@@ -9,7 +9,10 @@ import NotFound from "./pages/NotFound";
 import ProjectDetails from "./pages/ProjectDetails";
 import TaskDetails from "./pages/TaskDetails";
 import EditTask from "./pages/EditTask";
+import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
 import { DevFlowProvider } from "./context/DevFlowContext";
+
 
 function App() {
   return (
@@ -20,6 +23,8 @@ function App() {
           <Route path="activity" element={<Activity />} />
           <Route path="analytics" element={<Analytics />} />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="projects" element={<Projects />} />
           <Route path="projects/:projectId" element={<ProjectDetails />} />
           <Route
