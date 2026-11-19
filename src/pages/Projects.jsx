@@ -1,8 +1,11 @@
 import ProjectCard from "../components/projects/ProjectCard";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import DevFlowContext from "../context/DevFlowContext";
+import CreateProjectModal from "../components/projects/CreateProjectModal";
 function Projects() {
   const { projectList, taskList } = useContext(DevFlowContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <>
       {/* project header */}
@@ -14,7 +17,10 @@ function Projects() {
           </p>
         </div>
 
-        <button className="rounded-lg bg-devflow-blue px-4 py-2 text-sm font-medium text-white hover:bg-devflow-blue-hover">
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="rounded-lg bg-devflow-blue px-4 py-2 text-sm font-medium text-white hover:bg-devflow-blue-hover"
+        >
           + Create Project
         </button>
       </div>
@@ -34,6 +40,10 @@ function Projects() {
           );
         })}
       </div>
+      {/* Create project modal */}
+      {isModalOpen && (
+        <CreateProjectModal onClose={() => setIsModalOpen(false)} />
+      )}
     </>
   );
 }

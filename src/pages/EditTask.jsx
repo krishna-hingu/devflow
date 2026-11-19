@@ -21,7 +21,6 @@ function EditTask() {
   });
 
   const handleSaveTask = () => {
-    console.log("Save Changes clicked");
     setTaskList((currentTasks) => {
       return currentTasks.map((item) => {
         if (item.id === task.id && item.projectId === task.projectId) {
