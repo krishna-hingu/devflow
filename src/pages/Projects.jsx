@@ -26,7 +26,7 @@ function Projects() {
       </div>
 
       {/* project list card  */}
-      <div className="space-y-2">
+      <div className="space-y-4">
         {projectList.map((project) => {
           const projectTasks = taskList.filter(
             (task) => task.projectId === project.id,
