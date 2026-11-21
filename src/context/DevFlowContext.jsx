@@ -31,6 +31,50 @@ export function DevFlowProvider({ children }) {
     );
   };
 
+  // Task CRUD Functions
+  const addTask = (newTask) => {
+    setTaskList((currentTasks) => {
+      const newTaskId = Math.max(...currentTasks.map((task) => task.id), 0) + 1;
+
+      return [
+        ...currentTasks,
+        {
+          ...newTask,
+          id: newTaskId,
+        },
+      ];
+    });
+  };
+
+  const updateTask = (taskId, updatedData) => {
+    setTaskList((currentTasks) =>
+      currentTasks.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              ...updatedData,
+              id: task.id,
+              projectId: task.projectId,
+            }
+          : task,
+      ),
+    );
+  };
+
+  const deleteTask = (taskId) => {
+    setTaskList((currentTasks) =>
+      currentTasks.filter((task) => task.id !== taskId),
+    );
+  };
+
+  const completeTask = (taskId) => {
+    setTaskList((currentTasks) =>
+      currentTasks.map((task) =>
+        task.id === taskId ? { ...task, status: "Completed" } : task,
+      ),
+    );
+  };
+
   return (
     <DevFlowContext.Provider
       value={{
@@ -38,9 +82,17 @@ export function DevFlowProvider({ children }) {
         setTaskList,
         projectList,
         setProjectList,
+
+        // Project CRUD
         addProject,
         updateProject,
         deleteProject,
+
+        // Task CRUD
+        addTask,
+        updateTask,
+        deleteTask,
+        completeTask,
       }}
     >
       {children}

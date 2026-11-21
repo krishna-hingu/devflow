@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import DevFlowContext from "../context/DevFlowContext";
 
 function EditTask() {
-  const { taskList, setTaskList } = useContext(DevFlowContext);
+  const { taskList, updateTask } = useContext(DevFlowContext);
   const { projectId, taskId } = useParams();
   const navigate = useNavigate();
 
@@ -21,17 +21,7 @@ function EditTask() {
   });
 
   const handleSaveTask = () => {
-    setTaskList((currentTasks) => {
-      return currentTasks.map((item) => {
-        if (item.id === task.id && item.projectId === task.projectId) {
-          return {
-            ...item,
-            ...formData,
-          };
-        }
-        return item;
-      });
-    });
+    updateTask(task.id, formData);
     navigate(`/projects/${projectId}/tasks/${taskId}`);
   };
 

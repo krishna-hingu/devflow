@@ -1,13 +1,10 @@
-import {
-  Link,
-  useParams,
-  useNavigate,
-} from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import DevFlowContext from "../context/DevFlowContext";
 
 function TaskDetails() {
-  const { taskList, setTaskList, projectList } = useContext(DevFlowContext);
+  const { taskList, projectList, completeTask, deleteTask } =
+    useContext(DevFlowContext);
   const { projectId, taskId } = useParams();
   const navigate = useNavigate();
 
@@ -22,26 +19,11 @@ function TaskDetails() {
   const project = projectList.find((project) => project.id === task.projectId);
 
   const handleCompleteTask = () => {
-    setTaskList((currentTask) =>
-      currentTask.map((item) => {
-        if (item.id === task.id) {
-          return {
-            ...item,
-            status: "Completed",
-          };
-        }
-        return item;
-      }),
-    );
+    completeTask(task.id);
   };
 
   const handleDeleteTask = () => {
-    setTaskList((currentTasks) =>
-      currentTasks.filter((item) => {
-        return item.id !== task.id;
-      }),
-    );
-
+    deleteTask(task.id);
     navigate(`/projects/${projectId}`);
   };
 

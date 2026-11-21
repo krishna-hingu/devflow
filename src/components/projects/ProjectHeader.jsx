@@ -14,7 +14,15 @@ function ProjectHeader({ project, onEdit, onDelete }) {
       </div>
 
       <div className="flex flex-col items-end gap-3">
-        <span className="rounded-full bg-devflow-blue/10 px-3 py-1 text-sm text-devflow-blue">
+        <span
+          className={`rounded-full px-3 py-1 text-xs font-medium ${
+            project.status === "Completed"
+              ? "bg-devflow-success/10 text-devflow-success"
+              : project.status === "In Progress"
+                ? "bg-devflow-blue/10 text-devflow-blue"
+                : "bg-devflow-warning/10 text-devflow-warning"
+          }`}
+        >
           {project.status}
         </span>
 

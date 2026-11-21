@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+
+import CreateTaskModal from "../tasks/CreateTaskModal";
+
 function ProjectTasks({ tasks, projectId }) {
+  const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState(false);
+
   return (
     <section className="rounded-xl border border-devflow-border bg-devflow-card p-6">
       <div className="mb-5 flex items-center justify-between">
@@ -10,7 +16,10 @@ function ProjectTasks({ tasks, projectId }) {
           </p>
         </div>
         <div>
-          <button className="rounded-lg bg-devflow-blue px-4 py-2 text-sm font-medium text-devflow-text hover:bg-devflow-blue-hover">
+          <button
+            className="rounded-lg bg-devflow-blue px-4 py-2 text-sm font-medium text-devflow-text hover:bg-devflow-blue-hover"
+            onClick={() => setIsCreateTaskModalOpen(true)}
+          >
             + Add Task
           </button>
         </div>
@@ -48,6 +57,12 @@ function ProjectTasks({ tasks, projectId }) {
           </Link>
         ))}
       </div>
+      {isCreateTaskModalOpen && (
+        <CreateTaskModal
+          projectId={projectId}
+          onClose={() => setIsCreateTaskModalOpen(false)}
+        />
+      )}
     </section>
   );
 }
