@@ -31,11 +31,11 @@ function TaskDetails() {
   return (
     <main className="mx-auto w-full max-w-5xl min-w-0">
       <section className="rounded-xl border border-devflow-border bg-devflow-card p-4">
-        <h1 className="break-words text-xl font-semibold text-devflow-text sm:text-2xl">
+        <h1 className="wrap-break-word text-xl font-semibold text-devflow-text sm:text-2xl">
           {task.title}
         </h1>
 
-        <p className="mt-3 max-w-2xl break-words text-sm leading-6 text-devflow-text-muted sm:text-base sm:leading-7">
+        <p className="mt-3 max-w-2xl wrap-break-word text-sm leading-6 text-devflow-text-muted sm:text-base sm:leading-7">
           {task.description}
         </p>
 
@@ -74,13 +74,13 @@ function TaskDetails() {
         <div className="mt-4 grid grid-cols-1 gap-3 border-t border-devflow-border pt-5 sm:grid-cols-2 sm:gap-6">
           <div className="min-w-0">
             <span className="text-sm text-devflow-text-muted">Due Date</span>
-            <p className="mt-1 break-words text-sm font-medium text-devflow-text">
+            <p className="mt-1 wrap-break-word text-sm font-medium text-devflow-text">
               {task.dueDate}
             </p>
           </div>
           <div className="min-w-0">
             <span className="text-sm text-devflow-text-muted">Project</span>
-            <p className="mt-1 break-words text-sm font-medium text-devflow-text">
+            <p className="mt-1 wrap-break-word text-sm font-medium text-devflow-text">
               {project?.name || "Unknown Project"}
             </p>
           </div>
