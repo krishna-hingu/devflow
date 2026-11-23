@@ -2,7 +2,12 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import DevFlowContext from "../../context/DevFlowContext";
 
-function Header({ onMobileMenuClick, isMobileSidebarOpen }) {
+function Header({
+  onMobileMenuClick,
+  isMobileSidebarOpen,
+  onDesktopSidebarToggle,
+  isDesktopSidebarOpen,
+}) {
   const navigate = useNavigate();
 
   const { projectList, taskList } = useContext(DevFlowContext);
@@ -115,7 +120,7 @@ function Header({ onMobileMenuClick, isMobileSidebarOpen }) {
 
   return (
     <header className="sticky top-0 z-30 flex h-14 w-full min-w-0 items-center gap-2 border-b border-devflow-border bg-devflow-header/95 px-3 backdrop-blur sm:gap-3 sm:px-4 lg:px-5">
-      {/* Mobile navigation control. The desktop sidebar control lives inside Sidebar. */}
+      {/* Mobile sidebar toggle: preserves the current mobile drawer behaviour. */}
       <button
         type="button"
         onClick={onMobileMenuClick}
@@ -133,6 +138,34 @@ function Header({ onMobileMenuClick, isMobileSidebarOpen }) {
           aria-hidden="true"
         >
           <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      {/* Desktop sidebar toggle: stays in the header when the sidebar is hidden. */}
+      <button
+        type="button"
+        onClick={onDesktopSidebarToggle}
+        aria-label={isDesktopSidebarOpen ? "Hide sidebar" : "Show sidebar"}
+        aria-expanded={isDesktopSidebarOpen}
+        title={isDesktopSidebarOpen ? "Hide sidebar" : "Show sidebar"}
+        className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-devflow-border text-devflow-text transition-colors hover:bg-devflow-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-devflow-blue lg:inline-flex"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          className="h-4 w-4"
+          aria-hidden="true"
+        >
+          <rect x="3" y="4" width="18" height="16" rx="2" />
+          <path d="M9 4v16" />
+          {isDesktopSidebarOpen ? (
+            <path d="m14 9 3 3-3 3" />
+          ) : (
+            <path d="m10 9-3 3 3 3" />
+          )}
         </svg>
       </button>
 
