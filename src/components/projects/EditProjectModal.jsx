@@ -31,7 +31,7 @@ function EditProjectModal({ project, onClose }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/60 p-4">
       <div className="my-auto max-h-[calc(100dvh-2rem)] w-full max-w-lg overflow-y-auto rounded-xl border border-devflow-border bg-devflow-card p-4 shadow-xl sm:p-6">
-        <div className="mb-5 flex items-center justify-between gap-3 sm:mb-6">
+        <div className="mb-4 flex items-center justify-between gap-3 sm:mb-6">
           <h2 className="text-lg font-semibold text-devflow-text sm:text-xl">
             Edit Project
           </h2>
@@ -45,9 +45,9 @@ function EditProjectModal({ project, onClose }) {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <label htmlFor="projectName" className="mb-2 block text-sm font-medium text-devflow-text">
+            <label htmlFor="projectName" className="mb-1.5 block text-xs font-medium text-devflow-text">
               Project Name
             </label>
             <input
@@ -56,12 +56,12 @@ function EditProjectModal({ project, onClose }) {
               placeholder="Enter project name"
               value={projectName}
               onChange={(event) => setProjectName(event.target.value)}
-              className="w-full min-w-0 rounded-lg border border-devflow-border bg-devflow-background px-3 py-2.5 text-sm text-devflow-text outline-none focus:border-devflow-blue"
+              className="w-full min-w-0 rounded-lg border border-devflow-border bg-devflow-background px-3 py-2 text-[13px] text-devflow-text outline-none focus:border-devflow-blue"
             />
           </div>
 
           <div>
-            <label htmlFor="projectDescription" className="mb-2 block text-sm font-medium text-devflow-text">
+            <label htmlFor="projectDescription" className="mb-1.5 block text-xs font-medium text-devflow-text">
               Description
             </label>
             <textarea
@@ -70,19 +70,19 @@ function EditProjectModal({ project, onClose }) {
               placeholder="Describe your project..."
               value={projectDescription}
               onChange={(event) => setProjectDescription(event.target.value)}
-              className="w-full min-w-0 resize-y rounded-lg border border-devflow-border bg-devflow-background px-3 py-2.5 text-sm text-devflow-text outline-none focus:border-devflow-blue"
+              className="w-full min-w-0 resize-y rounded-lg border border-devflow-border bg-devflow-background px-3 py-2 text-[13px] text-devflow-text outline-none focus:border-devflow-blue"
             />
           </div>
 
           <div>
-            <label htmlFor="projectStatus" className="mb-2 block text-sm font-medium text-devflow-text">
+            <label htmlFor="projectStatus" className="mb-1.5 block text-xs font-medium text-devflow-text">
               Project Status
             </label>
             <select
               id="projectStatus"
               value={projectStatus}
               onChange={(event) => setProjectStatus(event.target.value)}
-              className="w-full min-w-0 rounded-lg border border-devflow-border bg-devflow-background px-3 py-2.5 text-sm text-devflow-text outline-none focus:border-devflow-blue"
+              className="w-full min-w-0 rounded-lg border border-devflow-border bg-devflow-background px-3 py-2 text-[13px] text-devflow-text outline-none focus:border-devflow-blue"
             >
               <option value="Pending">Pending</option>
               <option value="In Progress">In Progress</option>
@@ -91,7 +91,7 @@ function EditProjectModal({ project, onClose }) {
           </div>
 
           <div>
-            <label htmlFor="projectDueDate" className="mb-2 block text-sm font-medium text-devflow-text">
+            <label htmlFor="projectDueDate" className="mb-1.5 block text-xs font-medium text-devflow-text">
               Due Date
             </label>
             <input
@@ -99,7 +99,7 @@ function EditProjectModal({ project, onClose }) {
               type="date"
               value={projectDueDate}
               onChange={(event) => setProjectDueDate(event.target.value)}
-              className="w-full min-w-0 rounded-lg border border-devflow-border bg-devflow-background px-3 py-2.5 text-sm text-devflow-text outline-none focus:border-devflow-blue"
+              className="w-full min-w-0 rounded-lg border border-devflow-border bg-devflow-background px-3 py-2 text-[13px] text-devflow-text outline-none focus:border-devflow-blue"
             />
           </div>
 
@@ -107,13 +107,13 @@ function EditProjectModal({ project, onClose }) {
             <button
               type="button"
               onClick={onClose}
-              className="min-h-11 rounded-lg border border-devflow-border px-4 py-2.5 text-sm font-medium text-devflow-text-muted transition-colors hover:bg-devflow-background"
+              className="min-h-10 rounded-lg border border-devflow-border px-3 py-2 text-xs font-medium text-devflow-text-muted transition-colors hover:bg-devflow-background"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="min-h-11 rounded-lg bg-devflow-blue px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-devflow-blue-hover"
+              className="min-h-10 rounded-lg bg-devflow-blue px-3 py-2 text-xs font-medium text-white transition-colors hover:bg-devflow-blue-hover"
             >
               Save Changes
             </button>
