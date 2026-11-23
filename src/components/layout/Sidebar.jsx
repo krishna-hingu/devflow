@@ -7,12 +7,7 @@ const navigationItems = [
   { name: "Activity", path: "/activity", abbreviation: "A" },
 ];
 
-function Sidebar({
-  isMobileOpen,
-  isDesktopOpen,
-  onClose,
-  onDesktopToggle,
-}) {
+function Sidebar({ isMobileOpen, isDesktopOpen, onClose }) {
   const mobileVisibility = isMobileOpen
     ? "visible translate-x-0"
     : "invisible -translate-x-full";
@@ -45,27 +40,6 @@ function Sidebar({
           </Link>
 
           <div className="flex shrink-0 items-center gap-1">
-            <button
-              type="button"
-              onClick={onDesktopToggle}
-              aria-label="Hide sidebar"
-              title="Hide sidebar"
-              className="hidden h-8 w-8 items-center justify-center rounded-lg text-devflow-text-muted transition-colors hover:bg-devflow-card hover:text-devflow-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-devflow-blue lg:inline-flex"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                className="h-4 w-4"
-                aria-hidden="true"
-              >
-                <rect x="3" y="4" width="18" height="16" rx="2" />
-                <path d="M9 4v16M14 9l-3 3 3 3" />
-              </svg>
-            </button>
-
             <button
               type="button"
               aria-label="Close navigation menu"
@@ -111,29 +85,6 @@ function Sidebar({
         </div>
       </aside>
 
-      {/* Re-open handle stays beside the content when the desktop sidebar is hidden. */}
-      {!isDesktopOpen && (
-        <button
-          type="button"
-          onClick={onDesktopToggle}
-          aria-label="Show sidebar"
-          title="Show sidebar"
-          className="fixed left-2 top-[4.25rem] z-30 hidden h-9 w-9 items-center justify-center rounded-lg border border-devflow-border bg-devflow-sidebar text-devflow-text-muted shadow-lg transition-colors hover:text-devflow-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-devflow-blue lg:inline-flex"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            className="h-4 w-4"
-            aria-hidden="true"
-          >
-            <rect x="3" y="4" width="18" height="16" rx="2" />
-            <path d="M9 4v16m2-8 3-3m-3 3 3 3" />
-          </svg>
-        </button>
-      )}
     </>
   );
 }
