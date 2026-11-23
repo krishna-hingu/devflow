@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import AppLayout from "./components/layout/AppLayout";
 import Activity from "./pages/Activity";
-import Analytics from "./pages/Analytics";
 import Dashboard from "./pages/Dashboard";
 import Projects from "./pages/Projects";
 import Tasks from "./pages/Tasks";
@@ -11,17 +10,17 @@ import TaskDetails from "./pages/TaskDetails";
 import EditTask from "./pages/EditTask";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
-import { DevFlowProvider } from "./context/DevFlowContext";
 
+import { DevFlowProvider } from "./context/DevFlowContext";
 
 function App() {
   return (
     <DevFlowProvider>
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" />} />
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="/" element={<AppLayout />}>
           <Route path="activity" element={<Activity />} />
-          <Route path="analytics" element={<Analytics />} />
+          <Route path="analytics" element={<Navigate to="/dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="settings" element={<Settings />} />
           <Route path="profile" element={<Profile />} />
