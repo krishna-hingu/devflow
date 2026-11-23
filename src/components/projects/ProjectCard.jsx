@@ -5,13 +5,13 @@ function ProjectCard({ project, tasks }) {
   const { totalTasks, completedTasks, progress } = getProjectStats(tasks);
 
   return (
-    <article className="rounded-xl border border-devflow-border bg-devflow-card p-4 sm:p-5">
-      <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+    <article className="rounded-xl border border-devflow-border bg-devflow-card p-4">
+      <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0 flex-1">
-          <h2 className="break-words text-base font-semibold text-devflow-text sm:text-lg">
+          <h2 className="break-words text-base font-semibold text-devflow-text">
             {project.name}
           </h2>
-          <p className="mt-1 break-words text-sm leading-5 text-devflow-text-muted">
+          <p className="mt-1 break-words text-[13px] leading-5 text-devflow-text-muted">
             {project.description}
           </p>
         </div>
@@ -29,7 +29,7 @@ function ProjectCard({ project, tasks }) {
         </span>
       </div>
 
-      <div className="mt-5">
+      <div className="mt-4">
         <div className="mb-2 flex items-center justify-between gap-3">
           <span className="text-sm text-devflow-text-muted">Progress</span>
           <span className="shrink-0 text-sm tabular-nums text-devflow-text">
@@ -37,7 +37,7 @@ function ProjectCard({ project, tasks }) {
           </span>
         </div>
         <div
-          className="h-2 overflow-hidden rounded-full bg-devflow-background"
+          className="h-1.5 overflow-hidden rounded-full bg-devflow-background"
           role="progressbar"
           aria-label={`${project.name} completion`}
           aria-valuemin={0}
@@ -51,14 +51,14 @@ function ProjectCard({ project, tasks }) {
         </div>
       </div>
 
-      <div className="mt-5 flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-3">
+      <div className="mt-4 flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-3">
         <span className="text-devflow-text-muted">
           {completedTasks} of {totalTasks} tasks completed
         </span>
         <span className="text-devflow-text-muted">Due {project.dueDate}</span>
       </div>
 
-      <div className="mt-4 flex justify-start sm:justify-end">
+      <div className="mt-3 flex justify-start sm:justify-end">
         <Link
           to={`/projects/${project.id}`}
           className="inline-flex min-h-10 items-center rounded-lg text-sm font-medium text-devflow-blue transition-colors hover:text-devflow-blue-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-devflow-blue focus-visible:ring-offset-2 focus-visible:ring-offset-devflow-card"
