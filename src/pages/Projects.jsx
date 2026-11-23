@@ -10,9 +10,9 @@ function Projects() {
   return (
     <>
       {/* Project Heading and Primary Action */}
-      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0">
-          <h1 className="text-xl font-semibold text-devflow-text sm:text-2xl">
+          <h1 className="text-lg font-semibold text-devflow-text sm:text-xl">
             Projects
           </h1>
           <p className="mt-1 text-sm text-devflow-text-muted">
@@ -23,14 +23,14 @@ function Projects() {
         <button
           type="button"
           onClick={() => setIsCreateProjectModalOpen(true)}
-          className="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-devflow-blue px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-devflow-blue-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-devflow-blue focus-visible:ring-offset-2 focus-visible:ring-offset-devflow-background sm:w-auto"
+          className="inline-flex min-h-10 w-full items-center justify-center rounded-lg bg-devflow-blue px-3 py-2 text-xs font-medium text-white transition-colors hover:bg-devflow-blue-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-devflow-blue focus-visible:ring-offset-2 focus-visible:ring-offset-devflow-background sm:w-auto"
         >
           + Create Project
         </button>
       </div>
 
       {/* Project List */}
-      <div className="space-y-4">
+      <div className="space-y-3">
         {projectList.length > 0 ? (
           projectList.map((project) => {
             const projectTasks = taskList.filter(
