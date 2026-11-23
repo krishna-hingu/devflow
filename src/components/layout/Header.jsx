@@ -5,7 +5,7 @@ import DevFlowContext from "../../context/DevFlowContext";
 function Header({
   onMobileMenuClick,
   onDesktopSidebarToggle,
-  isSidebarCollapsed,
+  isDesktopSidebarOpen,
 }) {
   const navigate = useNavigate();
 
@@ -128,6 +128,7 @@ function Header({
         type="button"
         onClick={onMobileMenuClick}
         aria-label="Open navigation menu"
+        aria-expanded={undefined}
         className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-devflow-border text-devflow-text transition-colors hover:bg-devflow-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-devflow-blue lg:hidden"
       >
         <svg
@@ -143,13 +144,13 @@ function Header({
         </svg>
       </button>
 
-      {/* Desktop sidebar collapse button */}
+      {/* Desktop show/hide sidebar button */}
       <button
         type="button"
         onClick={onDesktopSidebarToggle}
-        aria-label={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-        aria-expanded={!isSidebarCollapsed}
-        title={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+        aria-label={isDesktopSidebarOpen ? "Hide sidebar" : "Show sidebar"}
+        aria-expanded={isDesktopSidebarOpen}
+        title={isDesktopSidebarOpen ? "Hide sidebar" : "Show sidebar"}
         className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-devflow-border text-devflow-text-muted transition-colors hover:bg-devflow-card hover:text-devflow-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-devflow-blue lg:inline-flex"
       >
         <svg
@@ -163,6 +164,8 @@ function Header({
         >
           <rect x="3" y="4" width="18" height="16" rx="2" />
           <path d="M9 4v16" />
+          {isDesktopSidebarOpen && <path d="m14 9 3 3-3 3" />}
+          {!isDesktopSidebarOpen && <path d="m10 9-3 3 3 3" />}
         </svg>
       </button>
 
