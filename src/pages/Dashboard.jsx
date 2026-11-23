@@ -284,7 +284,7 @@ function Dashboard() {
 
           <Link
             to="/tasks"
-            className="text-sm font-medium text-violet-300 transition-colors hover:text-violet-200"
+            className="inline-flex min-h-10 items-center text-sm font-medium text-violet-300 transition-colors hover:text-violet-200"
           >
             View all tasks
           </Link>
@@ -317,7 +317,7 @@ function Dashboard() {
             </p>
             <Link
               to="/tasks"
-              className="mt-4 inline-flex rounded-lg bg-violet-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-violet-500"
+              className="mt-4 inline-flex min-h-11 items-center justify-center rounded-lg bg-violet-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-violet-500"
             >
               Go to Tasks
             </Link>
