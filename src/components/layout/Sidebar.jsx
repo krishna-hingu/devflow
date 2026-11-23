@@ -10,11 +10,11 @@ const navigationItems = [
 function Sidebar({ isMobileOpen, isDesktopOpen, onClose }) {
   const mobileVisibility = isMobileOpen
     ? "visible translate-x-0"
-    : "invisible -translate-x-full lg:visible lg:translate-x-0";
+    : "invisible -translate-x-full";
 
   const desktopVisibility = isDesktopOpen
-    ? "lg:w-64 lg:border-r"
-    : "lg:w-0 lg:border-r-0 lg:overflow-hidden";
+    ? "lg:visible lg:translate-x-0 lg:w-64 lg:border-r"
+    : "lg:invisible lg:translate-x-0 lg:w-0 lg:border-r-0 lg:overflow-hidden";
 
   return (
     <aside
