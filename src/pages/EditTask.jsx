@@ -28,7 +28,7 @@ function EditTask() {
   return (
     <main className="mx-auto max-w-5xl">
       <div className="mb-6">
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight text-devflow-text">
+        <h1 className="mt-2 text-2xl font-semibold tracking-tight text-devflow-text sm:text-3xl">
           Edit Task
         </h1>
         <p className="mt-2 text-sm leading-6 text-devflow-text-muted">
@@ -37,7 +37,7 @@ function EditTask() {
       </div>
 
       <form
-        className="rounded-xl border border-devflow-border bg-devflow-card p-6 sm:p-8"
+        className="rounded-xl border border-devflow-border bg-devflow-card p-4 sm:p-6 lg:p-8"
         onSubmit={(event) => {
           event.preventDefault();
           handleSaveTask();
@@ -168,14 +168,14 @@ function EditTask() {
           <button
             type="button"
             onClick={() => navigate(`/projects/${projectId}/tasks/${taskId}`)}
-            className="rounded-lg border border-devflow-border px-5 py-3 text-sm font-medium text-devflow-text transition hover:bg-devflow-background"
+            className="min-h-11 rounded-lg border border-devflow-border px-5 py-3 text-sm font-medium text-devflow-text transition hover:bg-devflow-background"
           >
             Cancel
           </button>
 
           <button
             type="submit"
-            className="rounded-lg bg-devflow-blue px-5 py-3 text-sm font-semibold text-white transition hover:bg-devflow-blue-hover focus:outline-none focus:ring-2 focus:ring-devflow-blue/40 focus:ring-offset-2 focus:ring-offset-devflow-card"
+            className="min-h-11 rounded-lg bg-devflow-blue px-5 py-3 text-sm font-semibold text-white transition hover:bg-devflow-blue-hover focus:outline-none focus:ring-2 focus:ring-devflow-blue/40 focus:ring-offset-2 focus:ring-offset-devflow-card"
           >
             Save Changes
           </button>
