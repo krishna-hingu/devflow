@@ -43,7 +43,7 @@ function EditTask() {
           handleSaveTask();
         }}
       >
-        <div className="space-y-6">
+        <div className="space-y-4">
           <div>
             <label
               htmlFor="title"
@@ -63,7 +63,7 @@ function EditTask() {
                 }));
               }}
               required
-              className="w-full rounded-lg border border-devflow-border bg-devflow-background px-4 py-3 text-sm text-devflow-text outline-none transition placeholder:text-devflow-text-muted focus:border-devflow-blue focus:ring-2 focus:ring-devflow-blue/20"
+              className="w-full rounded-lg border border-devflow-border bg-devflow-background px-3 py-2.5 text-sm text-devflow-text outline-none transition placeholder:text-devflow-text-muted focus:border-devflow-blue focus:ring-2 focus:ring-devflow-blue/20"
             />
           </div>
 
@@ -85,7 +85,7 @@ function EditTask() {
                   description: event.target.value,
                 }));
               }}
-              className="w-full resize-y rounded-lg border border-devflow-border bg-devflow-background px-4 py-3 text-sm leading-6 text-devflow-text outline-none transition placeholder:text-devflow-text-muted focus:border-devflow-blue focus:ring-2 focus:ring-devflow-blue/20"
+              className="w-full resize-y rounded-lg border border-devflow-border bg-devflow-background px-3 py-2.5 text-sm leading-6 text-devflow-text outline-none transition placeholder:text-devflow-text-muted focus:border-devflow-blue focus:ring-2 focus:ring-devflow-blue/20"
             />
           </div>
 
@@ -107,7 +107,7 @@ function EditTask() {
                     status: event.target.value,
                   }));
                 }}
-                className="w-full rounded-lg border border-devflow-border bg-devflow-background px-4 py-3 text-sm text-devflow-text outline-none transition focus:border-devflow-blue focus:ring-2 focus:ring-devflow-blue/20"
+                className="w-full rounded-lg border border-devflow-border bg-devflow-background px-3 py-2.5 text-sm text-devflow-text outline-none transition focus:border-devflow-blue focus:ring-2 focus:ring-devflow-blue/20"
               >
                 <option value="Pending">Pending</option>
                 <option value="In Progress">In Progress</option>
@@ -132,7 +132,7 @@ function EditTask() {
                     priority: event.target.value,
                   }));
                 }}
-                className="w-full rounded-lg border border-devflow-border bg-devflow-background px-4 py-3 text-sm text-devflow-text outline-none transition focus:border-devflow-blue focus:ring-2 focus:ring-devflow-blue/20"
+                className="w-full rounded-lg border border-devflow-border bg-devflow-background px-3 py-2.5 text-sm text-devflow-text outline-none transition focus:border-devflow-blue focus:ring-2 focus:ring-devflow-blue/20"
               >
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
@@ -159,23 +159,23 @@ function EditTask() {
                   dueDate: event.target.value,
                 }));
               }}
-              className="w-full rounded-lg border border-devflow-border bg-devflow-background px-4 py-3 text-sm text-devflow-text outline-none transition focus:border-devflow-blue focus:ring-2 focus:ring-devflow-blue/20 sm:max-w-sm"
+              className="w-full rounded-lg border border-devflow-border bg-devflow-background px-3 py-2.5 text-sm text-devflow-text outline-none transition focus:border-devflow-blue focus:ring-2 focus:ring-devflow-blue/20 sm:max-w-sm"
             />
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col-reverse gap-3 border-t border-devflow-border pt-6 sm:flex-row sm:justify-end">
+        <div className="mt-6 flex flex-col-reverse gap-2 border-t border-devflow-border pt-6 sm:flex-row sm:justify-end">
           <button
             type="button"
             onClick={() => navigate(`/projects/${projectId}/tasks/${taskId}`)}
-            className="min-h-11 rounded-lg border border-devflow-border px-5 py-3 text-sm font-medium text-devflow-text transition hover:bg-devflow-background"
+            className="min-h-10 rounded-lg border border-devflow-border px-5 py-3 text-sm font-medium text-devflow-text transition hover:bg-devflow-background"
           >
             Cancel
           </button>
 
           <button
             type="submit"
-            className="min-h-11 rounded-lg bg-devflow-blue px-5 py-3 text-sm font-semibold text-white transition hover:bg-devflow-blue-hover focus:outline-none focus:ring-2 focus:ring-devflow-blue/40 focus:ring-offset-2 focus:ring-offset-devflow-card"
+            className="min-h-10 rounded-lg bg-devflow-blue px-5 py-3 text-sm font-semibold text-white transition hover:bg-devflow-blue-hover focus:outline-none focus:ring-2 focus:ring-devflow-blue/40 focus:ring-offset-2 focus:ring-offset-devflow-card"
           >
             Save Changes
           </button>
