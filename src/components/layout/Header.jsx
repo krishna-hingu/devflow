@@ -4,6 +4,7 @@ import DevFlowContext from "../../context/DevFlowContext";
 
 function Header({
   onMobileMenuClick,
+  isMobileSidebarOpen,
   onDesktopSidebarToggle,
   isDesktopSidebarOpen,
 }) {
@@ -127,8 +128,8 @@ function Header({
       <button
         type="button"
         onClick={onMobileMenuClick}
-        aria-label="Open navigation menu"
-        aria-expanded={undefined}
+        aria-label={isMobileSidebarOpen ? "Close navigation menu" : "Open navigation menu"}
+        aria-expanded={isMobileSidebarOpen}
         className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-devflow-border text-devflow-text transition-colors hover:bg-devflow-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-devflow-blue lg:hidden"
       >
         <svg
