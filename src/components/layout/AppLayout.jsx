@@ -5,7 +5,7 @@ import Sidebar from "./Sidebar";
 
 function AppLayout() {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isDesktopSidebarOpen, setIsDesktopSidebarOpen] = useState(true);
 
   const closeMobileSidebar = () => {
     setIsMobileSidebarOpen(false);
@@ -25,7 +25,7 @@ function AppLayout() {
 
       <Sidebar
         isMobileOpen={isMobileSidebarOpen}
-        isCollapsed={isSidebarCollapsed}
+        isDesktopOpen={isDesktopSidebarOpen}
         onClose={closeMobileSidebar}
       />
 
@@ -35,9 +35,9 @@ function AppLayout() {
             setIsMobileSidebarOpen((isOpen) => !isOpen)
           }
           onDesktopSidebarToggle={() =>
-            setIsSidebarCollapsed((isCollapsed) => !isCollapsed)
+            setIsDesktopSidebarOpen((isOpen) => !isOpen)
           }
-          isSidebarCollapsed={isSidebarCollapsed}
+          isDesktopSidebarOpen={isDesktopSidebarOpen}
         />
 
         <main className="min-h-[calc(100dvh-4rem)] w-full min-w-0 flex-1 bg-devflow-background px-3 py-4 sm:px-4 sm:py-5 lg:p-6">
