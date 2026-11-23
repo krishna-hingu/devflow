@@ -2,7 +2,7 @@ import getProjectStats from "../../utils/projectStats";
 function ProjectProgress({ project, tasks }) {
   const { totalTasks, completedTasks, progress } = getProjectStats(tasks);
   return (
-    <section className="rounded-xl border border-devflow-border bg-devflow-card p-6">
+    <section className="rounded-xl border border-devflow-border bg-devflow-card p-4">
       <div className="mb-4 flex items-center justify-between">
         <div>
           <h2 className="text-lg font-semibold text-devflow-text">
