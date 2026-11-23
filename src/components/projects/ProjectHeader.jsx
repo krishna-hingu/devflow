@@ -4,11 +4,11 @@ function ProjectHeader({ project, onEdit, onDelete }) {
       <div className="min-w-0 flex-1">
         <p className="mb-2 text-sm text-devflow-text-muted">Project</p>
 
-        <h1 className="break-words text-lg font-semibold text-devflow-text sm:text-xl">
+        <h1 className="wrap-break-word text-lg font-semibold text-devflow-text sm:text-xl">
           {project.name}
         </h1>
 
-        <p className="mt-2 break-words text-[13px] leading-5 text-devflow-text-muted">
+        <p className="mt-2 wrap-break-word text-[13px] leading-5 text-devflow-text-muted">
           {project.description}
         </p>
       </div>
