@@ -33,10 +33,10 @@ function ProjectTasks({ tasks, projectId }) {
               className="flex min-w-0 flex-col gap-2 py-3 transition-colors hover:bg-devflow-background/40 sm:flex-row sm:items-start sm:justify-between sm:gap-5"
             >
               <div className="min-w-0 flex-1">
-                <h3 className="break-words font-medium text-devflow-text">
+                <h3 className="wrap-break-word font-medium text-devflow-text">
                   {task.title}
                 </h3>
-                <p className="mt-1 break-words text-sm leading-5 text-devflow-text-muted">
+                <p className="mt-1 wrap-break-word text-sm leading-5 text-devflow-text-muted">
                   {task.description}
                 </p>
               </div>
