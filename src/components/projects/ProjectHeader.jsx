@@ -1,21 +1,21 @@
 function ProjectHeader({ project, onEdit, onDelete }) {
   return (
-    <section className="flex items-start justify-between rounded-xl border border-devflow-border bg-devflow-card p-6">
-      <div>
+    <section className="flex flex-col gap-5 rounded-xl border border-devflow-border bg-devflow-card p-4 sm:p-6 lg:flex-row lg:items-start lg:justify-between">
+      <div className="min-w-0 flex-1">
         <p className="mb-2 text-sm text-devflow-text-muted">Project</p>
 
-        <h1 className="text-2xl font-semibold text-devflow-text">
+        <h1 className="break-words text-xl font-semibold text-devflow-text sm:text-2xl">
           {project.name}
         </h1>
 
-        <p className="mt-2 text-sm text-devflow-text-muted">
+        <p className="mt-2 break-words text-sm leading-6 text-devflow-text-muted">
           {project.description}
         </p>
       </div>
 
-      <div className="flex flex-col items-end gap-3">
+      <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center lg:flex-col lg:items-end">
         <span
-          className={`rounded-full px-3 py-1 text-xs font-medium ${
+          className={`w-fit max-w-full rounded-full px-3 py-1 text-xs font-medium ${
             project.status === "Completed"
               ? "bg-devflow-success/10 text-devflow-success"
               : project.status === "In Progress"
@@ -26,17 +26,19 @@ function ProjectHeader({ project, onEdit, onDelete }) {
           {project.status}
         </span>
 
-        <div className="flex gap-2">
+        <div className="grid w-full grid-cols-1 gap-2 sm:w-auto sm:grid-cols-2 lg:flex">
           <button
+            type="button"
             onClick={onEdit}
-            className="rounded-lg bg-devflow-blue px-4 py-2 text-sm font-medium text-white hover:bg-devflow-blue-hover"
+            className="min-h-11 rounded-lg bg-devflow-blue px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-devflow-blue-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-devflow-blue"
           >
             Edit Project
           </button>
 
           <button
+            type="button"
             onClick={onDelete}
-            className="rounded-lg border border-devflow-error/30 px-4 py-2 text-sm font-medium text-devflow-error hover:bg-devflow-error/10"
+            className="min-h-11 rounded-lg border border-devflow-error/30 px-4 py-2.5 text-sm font-medium text-devflow-error transition-colors hover:bg-devflow-error/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-devflow-error"
           >
             Delete Project
           </button>
