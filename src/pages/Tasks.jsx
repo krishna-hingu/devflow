@@ -22,7 +22,7 @@ function Tasks() {
     <div className="space-y-6">
       {/* Page Heading */}
       <div>
-        <h1 className="text-2xl font-bold text-devflow-text">My Tasks</h1>
+        <h1 className="text-xl font-bold text-devflow-text sm:text-2xl">My Tasks</h1>
 
         <p className="mt-1 text-sm text-devflow-text-muted">
           Manage and track all your work in one place.
@@ -83,7 +83,7 @@ function Tasks() {
           </div>
 
           {/* Status Filter */}
-          <div className="flex items-center gap-3">
+          <div className="flex w-full items-center gap-3 sm:w-auto">
             <label
               htmlFor="task-filter"
               className="text-sm text-devflow-text-muted"
@@ -95,7 +95,7 @@ function Tasks() {
               id="task-filter"
               value={activeFilter}
               onChange={(e) => setActiveFilter(e.target.value)}
-              className="rounded-lg border border-devflow-border bg-devflow-card px-4 py-2 text-sm text-devflow-text outline-none transition-colors focus:border-violet-500"
+              className="min-h-11 min-w-0 flex-1 rounded-lg border border-devflow-border bg-devflow-card px-3 py-2 text-sm text-devflow-text outline-none transition-colors focus:border-violet-500 sm:flex-none sm:px-4"
             >
               <option value="All">All Tasks</option>
               <option value="Pending">Pending</option>
