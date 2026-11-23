@@ -6,10 +6,10 @@ function ProjectTasks({ tasks, projectId }) {
   const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState(false);
 
   return (
-    <section className="rounded-xl border border-devflow-border bg-devflow-card p-4 sm:p-6">
-      <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <section className="rounded-xl border border-devflow-border bg-devflow-card p-4">
+      <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0">
-          <h2 className="text-lg font-semibold text-devflow-text">Tasks</h2>
+          <h2 className="text-base font-semibold text-devflow-text">Tasks</h2>
           <p className="mt-1 text-sm text-devflow-text-muted">
             Manage the work inside this project.
           </p>
@@ -17,7 +17,7 @@ function ProjectTasks({ tasks, projectId }) {
 
         <button
           type="button"
-          className="min-h-11 w-full shrink-0 rounded-lg bg-devflow-blue px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-devflow-blue-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-devflow-blue sm:w-auto"
+          className="min-h-10 w-full shrink-0 rounded-lg bg-devflow-blue px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-devflow-blue-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-devflow-blue sm:w-auto"
           onClick={() => setIsCreateTaskModalOpen(true)}
         >
           + Add Task
@@ -30,7 +30,7 @@ function ProjectTasks({ tasks, projectId }) {
             <Link
               to={`/projects/${projectId}/tasks/${task.id}`}
               key={task.id}
-              className="flex min-w-0 flex-col gap-3 py-4 transition-colors hover:bg-devflow-background/40 sm:flex-row sm:items-start sm:justify-between sm:gap-5"
+              className="flex min-w-0 flex-col gap-2 py-3 transition-colors hover:bg-devflow-background/40 sm:flex-row sm:items-start sm:justify-between sm:gap-5"
             >
               <div className="min-w-0 flex-1">
                 <h3 className="break-words font-medium text-devflow-text">
