@@ -31,8 +31,8 @@ function TaskRow({ task, project }) {
     >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         {/* Task and Project Information */}
-        <div>
-          <h3 className="font-medium text-devflow-text">{task.title}</h3>
+        <div className="min-w-0">
+          <h3 className="break-words font-medium text-devflow-text">{task.title}</h3>
 
           <p className="mt-1 text-sm text-devflow-text-muted">
             {project?.name || "Unknown Project"}
@@ -40,7 +40,7 @@ function TaskRow({ task, project }) {
         </div>
 
         {/* Status, Priority and Due Date */}
-        <div className="flex flex-wrap items-center gap-3 text-sm">
+        <div className="flex min-w-0 flex-wrap items-center gap-2 text-sm sm:gap-3">
           {/* Status Badge */}
           <span
             className={`rounded-full px-3 py-1 text-xs font-medium ${
