@@ -79,7 +79,7 @@ function Header({
                   <span className="w-full truncate text-[13px] font-medium text-devflow-text">
                     {project.name}
                   </span>
-                  <span className="line-clamp-2 w-full break-words text-xs text-devflow-text-muted">
+                  <span className="line-clamp-2 w-full wrap-break-word text-xs text-devflow-text-muted">
                     {project.description}
                   </span>
                 </button>
@@ -102,7 +102,7 @@ function Header({
                   <span className="w-full truncate text-[13px] font-medium text-devflow-text">
                     {task.title}
                   </span>
-                  <span className="line-clamp-2 w-full break-words text-xs text-devflow-text-muted">
+                  <span className="line-clamp-2 w-full wrap-break-word text-xs text-devflow-text-muted">
                     {task.description}
                   </span>
                 </button>
