@@ -8,10 +8,10 @@ function ProjectCard({ project, tasks }) {
     <article className="rounded-xl border border-devflow-border bg-devflow-card p-4">
       <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0 flex-1">
-          <h2 className="break-words text-base font-semibold text-devflow-text">
+          <h2 className="wrap-break-word text-base font-semibold text-devflow-text">
             {project.name}
           </h2>
-          <p className="mt-1 break-words text-[13px] leading-5 text-devflow-text-muted">
+          <p className="mt-1 wrap-break-word text-[13px] leading-5 text-devflow-text-muted">
             {project.description}
           </p>
         </div>
