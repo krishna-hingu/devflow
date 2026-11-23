@@ -34,6 +34,7 @@ function AppLayout() {
           onMobileMenuClick={() =>
             setIsMobileSidebarOpen((isOpen) => !isOpen)
           }
+          isMobileSidebarOpen={isMobileSidebarOpen}
           onDesktopSidebarToggle={() =>
             setIsDesktopSidebarOpen((isOpen) => !isOpen)
           }
