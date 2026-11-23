@@ -19,7 +19,7 @@ function Tasks() {
       : taskList.filter((task) => task.status === activeFilter);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Page Heading */}
       <div>
         <h1 className="text-xl font-bold text-devflow-text sm:text-2xl">My Tasks</h1>
@@ -30,39 +30,39 @@ function Tasks() {
       </div>
 
       {/* Summary Metrics */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {/* Total Tasks */}
-        <div className="group rounded-xl border border-violet-500/20 bg-violet-500/10 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-violet-400/50 hover:bg-violet-500/15 hover:shadow-lg hover:shadow-violet-500/10">
+        <div className="group rounded-xl border border-violet-500/20 bg-violet-500/10 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-violet-400/50 hover:bg-violet-500/15 hover:shadow-lg hover:shadow-violet-500/10">
           <p className="text-sm font-medium text-violet-300">Total Tasks</p>
 
-          <h2 className="mt-3 text-3xl font-bold text-devflow-text transition-colors group-hover:text-violet-300">
+          <h2 className="mt-2 text-2xl font-bold text-devflow-text transition-colors group-hover:text-violet-300">
             {totalTasks}
           </h2>
         </div>
 
         {/* Pending */}
-        <div className="group rounded-xl border border-amber-500/20 bg-amber-500/10 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-amber-400/50 hover:bg-amber-500/15 hover:shadow-lg hover:shadow-amber-500/10">
+        <div className="group rounded-xl border border-amber-500/20 bg-amber-500/10 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-amber-400/50 hover:bg-amber-500/15 hover:shadow-lg hover:shadow-amber-500/10">
           <p className="text-sm font-medium text-amber-300">Pending</p>
 
-          <h2 className="mt-3 text-3xl font-bold text-devflow-text transition-colors group-hover:text-amber-300">
+          <h2 className="mt-2 text-2xl font-bold text-devflow-text transition-colors group-hover:text-amber-300">
             {pendingTasks}
           </h2>
         </div>
 
         {/* In Progress */}
-        <div className="group rounded-xl border border-blue-500/20 bg-blue-500/10 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/50 hover:bg-blue-500/15 hover:shadow-lg hover:shadow-blue-500/10">
+        <div className="group rounded-xl border border-blue-500/20 bg-blue-500/10 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/50 hover:bg-blue-500/15 hover:shadow-lg hover:shadow-blue-500/10">
           <p className="text-sm font-medium text-blue-300">In Progress</p>
 
-          <h2 className="mt-3 text-3xl font-bold text-devflow-text transition-colors group-hover:text-blue-300">
+          <h2 className="mt-2 text-2xl font-bold text-devflow-text transition-colors group-hover:text-blue-300">
             {inProgressTasks}
           </h2>
         </div>
 
         {/* Completed */}
-        <div className="group rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-400/50 hover:bg-emerald-500/15 hover:shadow-lg hover:shadow-emerald-500/10">
+        <div className="group rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-400/50 hover:bg-emerald-500/15 hover:shadow-lg hover:shadow-emerald-500/10">
           <p className="text-sm font-medium text-emerald-300">Completed</p>
 
-          <h2 className="mt-3 text-3xl font-bold text-devflow-text transition-colors group-hover:text-emerald-300">
+          <h2 className="mt-2 text-2xl font-bold text-devflow-text transition-colors group-hover:text-emerald-300">
             {completedTasks}
           </h2>
         </div>
@@ -71,7 +71,7 @@ function Tasks() {
       {/* Task Overview */}
       <section className="space-y-5">
         {/* Task Overview Header */}
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-lg font-semibold text-devflow-text">
               Task Overview
@@ -119,7 +119,7 @@ function Tasks() {
               return <TaskRow key={task.id} task={task} project={project} />;
             })
           ) : (
-            <div className="rounded-xl border border-devflow-border bg-devflow-card px-6 py-10 text-center">
+            <div className="rounded-xl border border-devflow-border bg-devflow-card px-4 py-8 text-center">
               <h3 className="font-semibold text-devflow-text">
                 {taskList.length === 0 ? "No tasks yet" : "No matching tasks"}
               </h3>
