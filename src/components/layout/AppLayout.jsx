@@ -44,7 +44,7 @@ function AppLayout() {
         />
 
         <main className="min-h-[calc(100dvh-3.5rem)] w-full min-w-0 flex-1 bg-devflow-background px-3 py-3 sm:px-4 sm:py-4 lg:p-4 xl:p-5">
-          <div className="mx-auto w-full max-w-screen-xl min-w-0">
+          <div className="mx-auto w-full max-w-7xl min-w-0">
             <Outlet />
           </div>
         </main>
