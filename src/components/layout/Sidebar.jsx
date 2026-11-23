@@ -9,8 +9,8 @@ const navigationItems = [
 
 function Sidebar({ isMobileOpen, isDesktopOpen, onClose }) {
   const mobileVisibility = isMobileOpen
-    ? "translate-x-0"
-    : "-translate-x-full lg:translate-x-0";
+    ? "visible translate-x-0"
+    : "invisible -translate-x-full lg:visible lg:translate-x-0";
 
   const desktopVisibility = isDesktopOpen
     ? "lg:w-64 lg:border-r"
@@ -20,7 +20,6 @@ function Sidebar({ isMobileOpen, isDesktopOpen, onClose }) {
     <aside
       className={`fixed inset-y-0 left-0 z-50 flex h-dvh w-72 shrink-0 flex-col border-r border-devflow-border bg-devflow-sidebar transition-all duration-300 ease-in-out lg:sticky lg:top-0 lg:z-20 lg:h-screen ${mobileVisibility} ${desktopVisibility}`}
       aria-label="Main navigation"
-      aria-hidden={!isMobileOpen && !isDesktopOpen}
     >
       {/* Brand */}
       <div className="flex h-16 shrink-0 items-center justify-between border-b border-devflow-border px-5">
