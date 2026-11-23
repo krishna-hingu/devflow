@@ -25,11 +25,11 @@ function TaskRow({ task, project }) {
   return (
     <Link
       to={`/projects/${task.projectId}/tasks/${task.id}`}
-      className={`block rounded-xl border p-4 transition-colors duration-200 ${
+      className={`block rounded-lg border p-3 transition-colors duration-200 ${
         statusStyles[task.status] || "border-devflow-border bg-devflow-card"
       }`}
     >
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         {/* Task and Project Information */}
         <div className="min-w-0">
           <h3 className="break-words font-medium text-devflow-text">{task.title}</h3>
@@ -40,10 +40,10 @@ function TaskRow({ task, project }) {
         </div>
 
         {/* Status, Priority and Due Date */}
-        <div className="flex min-w-0 flex-wrap items-center gap-2 text-sm sm:gap-3">
+        <div className="flex min-w-0 flex-wrap items-center gap-2 text-xs sm:gap-3">
           {/* Status Badge */}
           <span
-            className={`rounded-full px-3 py-1 text-xs font-medium ${
+            className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${
               statusBadgeStyles[task.status] || "bg-slate-500/15 text-slate-300"
             }`}
           >
@@ -52,7 +52,7 @@ function TaskRow({ task, project }) {
 
           {/* Priority Badge */}
           <span
-            className={`rounded-full px-3 py-1 text-xs font-medium ${
+            className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${
               priorityStyles[task.priority] || "bg-slate-500/15 text-slate-300"
             }`}
           >
