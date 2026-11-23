@@ -69,7 +69,7 @@ function Activity() {
             type="button"
             aria-pressed={activeFilter === filter.value}
             onClick={() => setActiveFilter(filter.value)}
-            className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+            className={`min-h-10 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
               activeFilter === filter.value
                 ? "bg-violet-500/15 text-violet-300"
                 : "border border-devflow-border text-devflow-text-muted hover:bg-devflow-card hover:text-devflow-text"
@@ -158,7 +158,7 @@ function Activity() {
               <button
                 type="button"
                 onClick={() => setActiveFilter("All")}
-                className="mt-4 rounded-lg border border-devflow-border px-4 py-2 text-sm font-medium text-devflow-text transition-colors hover:border-violet-500 hover:text-violet-300"
+                className="mt-4 min-h-10 rounded-lg border border-devflow-border px-4 py-2 text-sm font-medium text-devflow-text transition-colors hover:border-violet-500 hover:text-violet-300"
               >
                 Show all activity
               </button>
