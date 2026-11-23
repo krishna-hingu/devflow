@@ -32,7 +32,7 @@ function TaskRow({ task, project }) {
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         {/* Task and Project Information */}
         <div className="min-w-0">
-          <h3 className="break-words font-medium text-devflow-text">{task.title}</h3>
+          <h3 className="wrap-break-word font-medium text-devflow-text">{task.title}</h3>
 
           <p className="mt-1 text-sm text-devflow-text-muted">
             {project?.name || "Unknown Project"}
