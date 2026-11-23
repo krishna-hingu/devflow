@@ -129,7 +129,7 @@ function Dashboard() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Dashboard Heading */}
       <div>
         <h1 className="text-xl font-bold text-devflow-text sm:text-2xl">
@@ -141,16 +141,16 @@ function Dashboard() {
       </div>
 
       {/* Personal Productivity Metrics */}
-      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <section className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {metrics.map((metric) => (
           <div
             key={metric.label}
-            className={`rounded-xl border ${metric.borderColor} ${metric.backgroundColor} p-5 transition-transform duration-200 hover:-translate-y-1`}
+            className={`rounded-xl border ${metric.borderColor} ${metric.backgroundColor} p-4 transition-transform duration-200 hover:-translate-y-1`}
           >
             <p className="text-sm font-medium text-devflow-text-muted">
               {metric.label}
             </p>
-            <p className={`mt-3 text-3xl font-bold ${metric.valueColor}`}>
+            <p className={`mt-2 text-2xl font-bold ${metric.valueColor}`}>
               {metric.value}
             </p>
             <p className="mt-2 text-xs text-devflow-text-muted">
@@ -161,8 +161,8 @@ function Dashboard() {
       </section>
 
       {/* Workload and Priority Analysis */}
-      <section className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-        <div className="rounded-xl border border-devflow-border bg-devflow-card p-5">
+      <section className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+        <div className="rounded-xl border border-devflow-border bg-devflow-card p-4">
           <div>
             <h2 className="text-lg font-semibold text-devflow-text">
               Workload Distribution
@@ -172,7 +172,7 @@ function Dashboard() {
             </p>
           </div>
 
-          <div className="mt-6 space-y-5">
+          <div className="mt-4 space-y-4">
             {statusBreakdown.map((item) => {
               const percentage =
                 totalTasks === 0
@@ -213,7 +213,7 @@ function Dashboard() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-devflow-border bg-devflow-card p-5">
+        <div className="rounded-xl border border-devflow-border bg-devflow-card p-4">
           <div>
             <h2 className="text-lg font-semibold text-devflow-text">
               Priority Focus
@@ -223,7 +223,7 @@ function Dashboard() {
             </p>
           </div>
 
-          <div className="mt-6 space-y-5">
+          <div className="mt-4 space-y-4">
             {priorityBreakdown.map((item) => {
               const percentage =
                 openTasks === 0
@@ -271,7 +271,7 @@ function Dashboard() {
       </section>
 
       {/* Next Actions */}
-      <section className="space-y-4">
+      <section className="space-y-3">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-lg font-semibold text-devflow-text">
@@ -307,7 +307,7 @@ function Dashboard() {
             })}
           </div>
         ) : (
-          <div className="rounded-xl border border-devflow-border bg-devflow-card px-6 py-10 text-center">
+          <div className="rounded-xl border border-devflow-border bg-devflow-card px-4 py-8 text-center">
             <h3 className="font-semibold text-devflow-text">
               No unfinished tasks
             </h3>
