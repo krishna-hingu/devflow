@@ -31,7 +31,6 @@ function AppLayout() {
         isMobileOpen={isMobileSidebarOpen}
         isDesktopOpen={isDesktopSidebarOpen}
         onClose={closeMobileSidebar}
-        onDesktopToggle={toggleDesktopSidebar}
       />
 
       <div className="flex min-h-dvh min-w-0 flex-1 flex-col">
@@ -40,6 +39,8 @@ function AppLayout() {
             setIsMobileSidebarOpen((isOpen) => !isOpen)
           }
           isMobileSidebarOpen={isMobileSidebarOpen}
+          onDesktopSidebarToggle={toggleDesktopSidebar}
+          isDesktopSidebarOpen={isDesktopSidebarOpen}
         />
 
         <main className="min-h-[calc(100dvh-3.5rem)] w-full min-w-0 flex-1 bg-devflow-background px-3 py-3 sm:px-4 sm:py-4 lg:p-4 xl:p-5">
